@@ -15,6 +15,8 @@ public interface ProductService {
 
 	int deleteProduct(ProductDto dto);
 
+	List<ProductDto> getProductHome(String type, int categoryId);
+
 	
 
 

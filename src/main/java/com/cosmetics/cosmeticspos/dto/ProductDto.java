@@ -12,6 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
+	public ProductDto(String photoOne, String title, String code, int priceOne) {
+		// TODO Auto-generated constructor stub
+		this.photoOne = photoOne;
+		this.title = title;
+		this.code = code;
+		this.priceOne = priceOne;
+	}
 	private int productId;
 	private int userAccountId;
 	private int categoryId;
@@ -37,5 +44,5 @@ public class ProductDto {
 	private int percent;
 	private int normalPriceOne;
 	private int normalPriceTwo;
-	
+	private double ratingCount;
 }

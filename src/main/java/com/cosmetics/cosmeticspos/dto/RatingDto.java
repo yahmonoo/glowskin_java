@@ -1,6 +1,6 @@
 package com.cosmetics.cosmeticspos.dto;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -18,6 +18,6 @@ public class RatingDto {
 	private int customerId;
 	private int productId;
 	private int rating;
-	private LocalDateTime date;
+	private Date date;
 
 }

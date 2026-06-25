@@ -7,13 +7,11 @@ import com.cosmetics.cosmeticspos.dto.CategoryDto;
 
 public interface CategoryDao {
 
+	List<Category> getCategory();
 	
-
 	 void addCategory(Category c); 
 
-    void updateCategory(Category c) ;
-
-	List<CategoryDto> getCategory();
+	 void updateCategory(Category c) ;
 		
 	}
 

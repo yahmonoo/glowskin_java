@@ -16,6 +16,8 @@ public interface RatingService {
 
 	List<RatingDto> getRating(String search);
 
-	int deleteRating(int RatingId);
+	
+
+	
 
 }

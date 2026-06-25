@@ -6,9 +6,49 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.cosmetics.cosmeticspos.dto.ItemtransactionDto;
+import com.cosmetics.cosmeticspos.dto.ProductDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@JsonInclude(value = Include.USE_DEFAULTS)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "product")
 public class Product {
+	public Product(ProductDto dto) {
+		// TODO Auto-generated constructor stub
+					this.productId=dto.getProductId();
+					this.userAccountId=dto.getUserAccountId();
+					this.categoryId=dto.getCategoryId();
+					this.type=dto.getType();
+					this.photoOne=dto.getPhotoOne();
+					this.photoTwo=dto.getPhotoTwo();
+					this.photoThree=dto.getPhotoThree();
+					this.photoFour=dto.getPhotoFour();
+					this.colorOne=dto.getColorOne();
+					this.colorTwo=dto.getColorTwo();
+					this.colorThree=dto.getColorThree();
+					this.colorFour=dto.getColorFour();
+					this.priceOne=dto.getPriceOne();
+					this.priceTwo=dto.getPriceTwo();
+					this.sizeOne=dto.getSizeOne();
+					this.sizeTwo=dto.getSizeTwo();
+					this.title=dto.getTitle();
+					this.detail=dto.getDetail();
+					this.code=dto.getCode();
+					this.count=dto.getCount();
+					this.discountPriceOne=dto.getDiscountPriceOne();
+					this.discountPriceTwo=dto.getDiscountPriceTwo();
+					this.percent=dto.getPercent();
+					this.normalPriceOne=dto.getNormalPriceOne();
+					this.normalPriceTwo=dto.getDiscountPriceTwo();				
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int productId;
@@ -36,157 +76,10 @@ public class Product {
 	private int percent;
 	private int normalPriceOne;
 	private int normalPriceTwo;
-	public int getProductId() {
+	public int getproductId() {
+		// TODO Auto-generated method stub
 		return productId;
 	}
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
-	public int getUserAccountId() {
-		return userAccountId;
-	}
-	public void setUserAccountId(int userAccountId) {
-		this.userAccountId = userAccountId;
-	}
-	public int getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
-	}
-	public String getPhotoOne() {
-		return photoOne;
-	}
-	public void setPhotoOne(String photoOne) {
-		this.photoOne = photoOne;
-	}
-	public String getPhotoTwo() {
-		return photoTwo;
-	}
-	public void setPhotoTwo(String photoTwo) {
-		this.photoTwo = photoTwo;
-	}
-	public String getPhotoThree() {
-		return photoThree;
-	}
-	public void setPhotoThree(String photoThree) {
-		this.photoThree = photoThree;
-	}
-	public String getPhotoFour() {
-		return photoFour;
-	}
-	public void setPhotoFour(String photoFour) {
-		this.photoFour = photoFour;
-	}
-	public String getColorOne() {
-		return colorOne;
-	}
-	public void setColorOne(String colorOne) {
-		this.colorOne = colorOne;
-	}
-	public String getColorTwo() {
-		return colorTwo;
-	}
-	public void setColorTwo(String colorTwo) {
-		this.colorTwo = colorTwo;
-	}
-	public String getColorThree() {
-		return colorThree;
-	}
-	public void setColorThree(String colorThree) {
-		this.colorThree = colorThree;
-	}
-	public String getColorFour() {
-		return colorFour;
-	}
-	public void setColorFour(String colorFour) {
-		this.colorFour = colorFour;
-	}
-	public int getPriceOne() {
-		return priceOne;
-	}
-	public void setPriceOne(int priceOne) {
-		this.priceOne = priceOne;
-	}
-	public int getPriceTwo() {
-		return priceTwo;
-	}
-	public void setPriceTwo(int priceTwo) {
-		this.priceTwo = priceTwo;
-	}
-	public int getSizeOne() {
-		return sizeOne;
-	}
-	public void setSizeOne(int sizeOne) {
-		this.sizeOne = sizeOne;
-	}
-	public int getSizeTwo() {
-		return sizeTwo;
-	}
-	public void setSizeTwo(int sizeTwo) {
-		this.sizeTwo = sizeTwo;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getDetail() {
-		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
-	public int getDiscountPriceOne() {
-		return discountPriceOne;
-	}
-	public void setDiscountPriceOne(int discountPriceOne) {
-		this.discountPriceOne = discountPriceOne;
-	}
-	public int getDiscountPriceTwo() {
-		return discountPriceTwo;
-	}
-	public void setDiscountPriceTwo(int discountPriceTwo) {
-		this.discountPriceTwo = discountPriceTwo;
-	}
-	public int getPercent() {
-		return percent;
-	}
-	public void setPercent(int percent) {
-		this.percent = percent;
-	}
-	public int getNormalPriceOne() {
-		return normalPriceOne;
-	}
-	public void setNormalPriceOne(int normalPriceOne) {
-		this.normalPriceOne = normalPriceOne;
-	}
-	public int getNormalPriceTwo() {
-		return normalPriceTwo;
-	}
-	public void setNormalPriceTwo(int normalPriceTwo) {
-		this.normalPriceTwo = normalPriceTwo;
+	
 	}
 	
-	
-
-}

@@ -1,5 +1,8 @@
 package com.cosmetics.cosmeticspos.dao;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class TownshipDaoImpl {
 
 }

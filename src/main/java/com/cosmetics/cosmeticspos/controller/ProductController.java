@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetics.cosmeticspos.dto.ProductDto;
 import com.cosmetics.cosmeticspos.service.ProductService;
-
-
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -25,7 +24,9 @@ public class ProductController {
 	ProductService productService;
 	
 	@GetMapping("product")
-	public List<ProductDto> getProduct(){
+	public List<ProductDto> getProduct(
+			//@RequestParam(name="userType",defaultValue = "p")String userType
+			){
 		return productService.getProduct();
 	}
 	@PostMapping("product")
@@ -43,5 +44,11 @@ public class ProductController {
 		
 		return productService.deleteProduct(dto);
 	}
-
+	@GetMapping("product/home")
+	public List<ProductDto> getProductHome(
+			@RequestParam(name="type",defaultValue = "p")String type,//p,d,b,c // popular,discount,best seller,cateogry
+			@RequestParam(name="categoryId",defaultValue = "0")int categoryId
+			){
+		return productService.getProductHome(type,categoryId);
+	}
 }
