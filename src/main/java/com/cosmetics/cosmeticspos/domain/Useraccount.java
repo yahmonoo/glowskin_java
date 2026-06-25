@@ -9,7 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.apache.xmlbeans.UserType;
+import com.cosmetics.cosmeticspos.dto.UseraccountDto;
+
+import lombok.Data;
 
 @Entity
 @Table(name = "useraccount")
@@ -23,10 +25,23 @@ public class Useraccount {
 	private String address;
 	private String userName;
 	private String password;
-	private Date date;
-	private String userType;
+	private LocalDateTime date;
+	private UserType userType;
 
-	public int getUserAccountId() {
+	public Useraccount(UseraccountDto dto) {
+		// TODO Auto-generated constructor stub
+		this.userAccountId = dto.getUserAccountId();
+		this.townshipId=dto.getTownshipId();
+		this.profileName=dto.getProfileName();
+		this.phone=dto.getPhone();
+		this.address=dto.getAddress();
+		this.userName=dto.getUserName();
+		this.password=dto.getPassword();
+		this.date=dto.getDate();
+		this.userType=dto.getUserType();
+	}
+
+	public int getUseraccountId() {
 		return userAccountId;
 	}
 
@@ -82,19 +97,19 @@ public class Useraccount {
 		this.password = password;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 
-	public String getUserType() {
+	public UserType getUserType() {
 		return userType;
 	}
 
-	public void setUserType(String userType) {
+	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
 

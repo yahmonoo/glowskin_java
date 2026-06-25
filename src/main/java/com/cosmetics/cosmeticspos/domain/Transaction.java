@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.cosmetics.cosmeticspos.dto.TransactionDto;
+
 @Entity
 @Table(name = "transaction")
 public class Transaction {
@@ -20,6 +22,16 @@ public class Transaction {
 	private String paymentType;
 	private LocalDateTime date;
 	private LocalDateTime modifiedDate;
+	public Transaction(TransactionDto dto) {
+		// TODO Auto-generated constructor stub
+		this.transactionId = dto.getTransactionId();
+		this.saleId = dto.getSaleId();
+		this.payment=dto.getPayment();
+		this.balance=dto.getBalance();
+		this.paymentType=dto.getPaymentType();
+		this.date=dto.getDate();
+		this.modifiedDate=dto.getModifiedDate();
+	}
 	public int getTransactionId() {
 		return transactionId;
 	}

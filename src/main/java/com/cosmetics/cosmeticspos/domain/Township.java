@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.cosmetics.cosmeticspos.dto.TownshipDto;
+
 @Entity
 @Table(name = "township")
 public class Township {
@@ -15,6 +17,12 @@ public class Township {
 	private int townshipId;
 	private int cityId;
 	private String townshipName;
+	public Township(TownshipDto dto) {
+		// TODO Auto-generated constructor stub
+		this.townshipId = dto.getTownshipId();
+		this.townshipName = dto.getTownshipName();
+		this.cityId=dto.getCityId();
+	}
 	public int getTownshipId() {
 		return townshipId;
 	}

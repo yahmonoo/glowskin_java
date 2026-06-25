@@ -1,5 +1,7 @@
 package com.cosmetics.cosmeticspos.dto;
 
+import com.cosmetics.cosmeticspos.domain.Transaction;
+
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
