@@ -1,5 +1,6 @@
 package com.cosmetics.cosmeticspos.dao;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +39,9 @@ public class TownshipDaoImpl implements TownshipDao {
 	public void deleteTownship(int townshipId) {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-		session.createNativeQuery("DELETE FROM township WHERE townshipid= :townshipId").setParameter(townshipId, townshipId).executeUpdate();
+	    session.createNativeQuery("DELETE FROM township WHERE townshipId= ?")
+		.setParameter(1, townshipId).executeUpdate();
 
-		
 	}
 
 	@Override
@@ -58,9 +59,9 @@ public class TownshipDaoImpl implements TownshipDao {
 		List<Object[]> objectList=session.createNativeQuery(sqlData).getResultList();
 		List<TownshipDto> townshipDtoList=new ArrayList<TownshipDto>();
 		for(Object[] object: objectList) {
-			int townshipId=Interger.parseInt(object[0].toString());
+			int townshipId=Integer.parseInt(object[0].toString());
 			String townshipName=object[1].toString();
-			int cityId=Interger.parseInt(object[2].toString());
+			int cityId=Integer.parseInt(object[2].toString());
 			TownshipDto dto =new TownshipDto(townshipId,cityId,townshipName);
 			townshipDtoList.add(dto);
 		}
@@ -68,4 +69,10 @@ public class TownshipDaoImpl implements TownshipDao {
 		return townshipDtoList;
 	}
 
+	@Override
+	public Township getTownshipById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+

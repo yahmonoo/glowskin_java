@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.cosmetics.cosmeticspos.dao.RatingDao;
 import com.cosmetics.cosmeticspos.domain.Rating;
 import com.cosmetics.cosmeticspos.dto.RatingDto;
@@ -49,14 +50,27 @@ public class RatingServiceImpl implements RatingService{
 
 	
 	@Transactional(readOnly=false)
-	@Override
-	public int deleteRating(int RatingId) {
-		// TODO Auto-generated method stub
+	
+	public int deleteRating(int ratingId) {
 		Rating r= new Rating();
-		r.setRatingId(RatingId);
-	    ratingDao.deleteRating(r);
-		return RatingId;
+		r.setRatingId(ratingId);
+		ratingDao.deleteRating(r);
+		return ratingId;
 	}
+
+	@Override
+	public int deleteRating(RatingDto dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<RatingDto> getRating() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 	
 

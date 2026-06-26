@@ -1,6 +1,7 @@
 package com.cosmetics.cosmeticspos.domain;
 
-import java.time.LocalDateTime;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,8 +21,8 @@ public class Transaction {
 	private int payment;
 	private int balance;
 	private String paymentType;
-	private LocalDateTime date;
-	private LocalDateTime modifiedDate;
+	private Date date;
+	private Date modifiedDate;
 	public Transaction(TransactionDto dto) {
 		// TODO Auto-generated constructor stub
 		this.transactionId = dto.getTransactionId();
@@ -29,8 +30,12 @@ public class Transaction {
 		this.payment=dto.getPayment();
 		this.balance=dto.getBalance();
 		this.paymentType=dto.getPaymentType();
-		this.date=dto.getDate();
-		this.modifiedDate=dto.getModifiedDate();
+		this.date=(dto.getDate() !=null)? dto.getDate() : newDate();
+		this.modifiedDate=new Date();
+	}
+	private Date newDate() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	public int getTransactionId() {
 		return transactionId;
@@ -62,16 +67,16 @@ public class Transaction {
 	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
 	}
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
-	public LocalDateTime getModifiedDate() {
+	public Date getModifiedDate() {
 		return modifiedDate;
 	}
-	public void setModifiedDate(LocalDateTime modifiedDate) {
+	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 	

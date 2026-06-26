@@ -41,7 +41,7 @@ public class ItemtransactionController {
 	@DeleteMapping("itemtransaction")
 	public int deleteItemtransaction(@RequestBody ItemtransactionDto dto){
 		
-		return itemtransactionService.deleteItemtransaction(dto);
+		return itemtransactionService.addItemtransaction(dto);
 	}
 
 }

@@ -26,13 +26,15 @@ public class CategoryDaoImpl implements CategoryDao {
 	@Override
 	public void updateCategory(Category c) {
 		// TODO Auto-generated method stub
-		
+		Session session = sessionFactory.getCurrentSession();
+		session.update(c);
 	}
 
 	@Override
-	public List<CategoryDto> getCategory() {
+	public List<Category> getCategory() {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		return session.createQuery("select c from Category c ").getResultList();
 	}
 
 }

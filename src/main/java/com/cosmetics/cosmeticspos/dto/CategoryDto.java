@@ -13,7 +13,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDto {
-	
+	public CategoryDto (Category category) {
+		// TODO Auto-generated constructor stub
+				this.categoryId = category.getCategoryId();
+				this.name = category.getName();
+				
+	}
 	private int categoryId;
 	private String name;
 

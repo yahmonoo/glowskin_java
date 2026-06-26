@@ -13,9 +13,7 @@ public interface TownshipService {
 
 		TownshipDto updateTownship(TownshipDto dto);
 
-		int deleteTownship(TownshipDto dto);
-
-		int deleteTownship(int id);
+		int deleteTownship(int townshipId);
 
 		TownshipDto getTownshipById(int id);
 

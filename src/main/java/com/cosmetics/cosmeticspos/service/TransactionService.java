@@ -8,11 +8,12 @@ public interface TransactionService {
 	
 	 List<TransactionDto> getTransaction();
 
-		int addTransaction(TransactionDto dto);
+		TransactionDto addTransaction(TransactionDto dto);
 
-		int updateTransaction(TransactionDto dto);
+		TransactionDto updateTransaction(TransactionDto dto);
+		int deleteTransaction(int transactionId);
 
-		int deleteTransaction(TransactionDto dto);
+		TransactionDto getTransactionById(int id);
 
 
 }

@@ -10,6 +10,9 @@ public interface UseraccountDao {
 
 	    void updateUseraccount(Useraccount ua) ;
 
-		List<UseraccountDto> getUseraccount();
+		List<UseraccountDto> getUseraccount(String userType);
+
+		void deleteUseraccount(int userAccountId);
+
 
 }

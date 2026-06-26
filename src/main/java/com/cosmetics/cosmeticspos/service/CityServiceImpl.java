@@ -35,10 +35,14 @@ public class CityServiceImpl implements CityService{
 		return ct.getCityId();
 	}
 
+	@Transactional(readOnly=true)
 	@Override
 	public int updateCity(CityDto dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		City  c= new City(dto);
+		cityDao.updateCity(c);
+		return c.getCityId();
+		
 	}
 
 	@Override
@@ -52,6 +56,11 @@ public class CityServiceImpl implements CityService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
+	
+
+	
 
 	
 }

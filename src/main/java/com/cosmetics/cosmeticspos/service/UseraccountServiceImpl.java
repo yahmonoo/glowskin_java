@@ -16,37 +16,46 @@ public class UseraccountServiceImpl  implements UseraccountService{
 	@Autowired
 	UseraccountDao useraccountDao;
 	
-	@Transactional(readOnly=true)
 	@Override
-	public List<UseraccountDto> getUseraccount() {
-		return useraccountDao.getUseraccount();
+	@Transactional(readOnly=true)
+	
+	public List<UseraccountDto> getUseraccount(String userType) {
+		return useraccountDao.getUseraccount(userType);
 		
 	}
-	
-	@Transactional(readOnly=false)
 	@Override
-	public int addUseraccount(UseraccountDto dto) {
+	@Transactional(readOnly=false)
+
+	public UseraccountDto addUseraccount(UseraccountDto dto) {
 		// TODO Auto-generated method stub
 		Useraccount ua = new Useraccount(dto);
 		useraccountDao.addUseraccount(ua);
-				return ua.getUseraccountId();
+				return dto;
 	}
-	
-	@Transactional(readOnly=false)
 	@Override
-	public int updateUseraccount(UseraccountDto dto) {
+	@Transactional(readOnly=false)
+	
+	public UseraccountDto updateUseraccount(UseraccountDto dto) {
 		// TODO Auto-generated method stub
 		Useraccount  ua= new Useraccount(dto);
 		useraccountDao.updateUseraccount(ua);
-		return ua.getUseraccountId();
+		return dto;
 		
 	}
 
 	@Override
-	public int deleteUseraccount(UseraccountDto dto) {
+	@Transactional(readOnly=false)
+	public int deleteUseraccount( int useraccountId) {
 		// TODO Auto-generated method stub
-		return 0;
+		useraccountDao.deleteUseraccount(useraccountId);
+		return useraccountId;
 	}
+
+	
+
+	
+	
+	
 
 	
 	

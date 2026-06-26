@@ -5,13 +5,23 @@ import java.util.List;
 import com.cosmetics.cosmeticspos.dto.UseraccountDto;
 
 public interface UseraccountService {
-	 List<UseraccountDto> getUseraccount();
 
-		int addUseraccount(UseraccountDto dto);
+		UseraccountDto addUseraccount(UseraccountDto dto);
 
-		int updateUseraccount(UseraccountDto dto);
+		UseraccountDto updateUseraccount(UseraccountDto dto);
 
-		int deleteUseraccount(UseraccountDto dto);
+
+
+		List<UseraccountDto> getUseraccount(String userType);
+
+
+		
+
+		int deleteUseraccount(int useraccountId);
+
+		
+
+		
 
 
 }

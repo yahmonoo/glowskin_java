@@ -6,10 +6,18 @@ import com.cosmetics.cosmeticspos.domain.Transaction;
 import com.cosmetics.cosmeticspos.dto.TransactionDto;
 
 public interface TransactionDao {
-	 void addTransaction(Transaction t); 
+	 void addTransaction(Transaction transaction); 
 
-	    void updateTransaction(Transaction t) ;
+	    void updateTransaction(Transaction transaction) ;
+	  
 
 		List<TransactionDto> getTransaction();
+
+		Transaction getTransactionById(int transactionId);
+
+		void deleteTransaction(int transactionId);
+
+		
+		
 
 }

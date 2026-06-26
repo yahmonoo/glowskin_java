@@ -19,7 +19,13 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional(readOnly=true)
 	@Override
 	public List<CategoryDto> getCategory() {
-		return categoryDao.getCategory();
+		List<Category> catList =  categoryDao.getCategory();
+		List<CategoryDto> dtoList = new ArrayList<>();
+		for(Category cat:catList) {
+			CategoryDto dto = new CategoryDto(cat);
+			dtoList.add(dto);
+		}	
+		return dtoList;
 		
 	}
 	

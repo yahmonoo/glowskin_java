@@ -25,8 +25,8 @@ public class Useraccount {
 	private String address;
 	private String userName;
 	private String password;
-	private LocalDateTime date;
-	private UserType userType;
+	private Date date;
+	private String userType;
 
 	public Useraccount(UseraccountDto dto) {
 		// TODO Auto-generated constructor stub
@@ -37,7 +37,7 @@ public class Useraccount {
 		this.address=dto.getAddress();
 		this.userName=dto.getUserName();
 		this.password=dto.getPassword();
-		this.date=dto.getDate();
+		this.date=dto.getDate()!=null ? dto.getDate():new Date();
 		this.userType=dto.getUserType();
 	}
 
@@ -97,19 +97,19 @@ public class Useraccount {
 		this.password = password;
 	}
 
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public UserType getUserType() {
+	public String getUserType() {
 		return userType;
 	}
 
-	public void setUserType(UserType userType) {
+	public void setUserType(String userType) {
 		this.userType = userType;
 	}
 

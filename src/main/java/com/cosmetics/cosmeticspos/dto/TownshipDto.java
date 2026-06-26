@@ -10,7 +10,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+@Data
 @JsonInclude(value = Include.USE_DEFAULTS)
+@NoArgsConstructor
+@AllArgsConstructor
 public class TownshipDto {
 	private int townshipId;
 	private int cityId;
@@ -23,21 +26,5 @@ public TownshipDto(Township township) {
 	
 	
 }
-public TownshipDto(int townshipId, int cityId, String townshipName) {
-	this.townshipId=townshipId;
-	this.cityId=cityId;
-	this.townshipName=townshipName;
-}
-public int getTownshipId() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-public String getTownshipName() {
-	// TODO Auto-generated method stub
-	return null;
-}
-public int getCityId() {
-	// TODO Auto-generated method stub
-	return 0;
-}
+
 }

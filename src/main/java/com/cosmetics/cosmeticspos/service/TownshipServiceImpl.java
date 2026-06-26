@@ -54,16 +54,12 @@ public class TownshipServiceImpl implements TownshipService {
 	}
 
 	@Override
-	public int deleteTownship(int id) {
-		// TODO Auto-generated method stub
-		townshipDao.deleteTownship(id);
-		return id;
-	}
+	@Transactional(readOnly=false)
 
-	@Override
-	public int deleteTownship(TownshipDto dto) {
+	public int deleteTownship(int townshipId) {
 		// TODO Auto-generated method stub
-		return 0;
+		townshipDao.deleteTownship(townshipId);
+		return townshipId;
 	}
 
 	
