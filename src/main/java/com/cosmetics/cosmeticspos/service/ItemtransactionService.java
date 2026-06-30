@@ -12,7 +12,7 @@ public interface ItemtransactionService {
 
 	int updateItemtransaction(ItemtransactionDto dto);
 
-	int deleteItemtransaction(int ItemtransactionId);
+	int deleteItemtransaction(int itemTransactionId);
 	
 	
 

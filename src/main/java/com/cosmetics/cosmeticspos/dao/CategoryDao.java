@@ -9,9 +9,9 @@ public interface CategoryDao {
 
 	List<Category> getCategory();
 	
-	 void addCategory(Category c); 
+	 void addCategory(Category cat); 
 
-	 void updateCategory(Category c) ;
+	void updateCategory(Category cat);
 		
 	}
 

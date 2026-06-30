@@ -12,12 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-	public ProductDto(String photoOne, String title, String code, int priceOne) {
+	public ProductDto(String photoOne, String title, String code, int priceOne,int rating) {
 		// TODO Auto-generated constructor stub
 		this.photoOne = photoOne;
 		this.title = title;
 		this.code = code;
 		this.priceOne = priceOne;
+		this.ratingCount = rating;
 	}
 	private int productId;
 	private int userAccountId;

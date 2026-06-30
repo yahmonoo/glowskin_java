@@ -12,8 +12,11 @@ public interface CityService {
 
 	int updateCity(CityDto dto);
 
+	List<CityDto> getCity(String search);
+
 	int deleteCity(CityDto dto);
 
-	int deleteCity(int cityId);
+	int deleteCity(int CityId);
+
 
 }

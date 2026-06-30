@@ -32,7 +32,9 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int updateProduct(ProductDto dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		Product p = new Product(dto);
+		productDao.updateProduct(p);
+		return p.getproductId();
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class ItemtransactionDto {
 		this.unitPrice=item.getUnitPrice();
 		this.amount=item.getAmount();
 		this.discount=item.getDiscount();
-		this.balance=item.getDiscount();
+		this.balance=item.getBalance();
 	}
 	private int itemTransactionId;
 	private int productId;

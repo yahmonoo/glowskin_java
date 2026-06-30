@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cosmetics.cosmeticspos.domain.City;
 import com.cosmetics.cosmeticspos.domain.Itemtransaction;
 import com.cosmetics.cosmeticspos.dto.ItemtransactionDto;
 
@@ -16,27 +17,29 @@ public class ItemtransactionDaoImpl implements ItemtransactionDao {
 	SessionFactory sessionFactory;
 
 	@Override
-	public void addItemtransaction(Itemtransaction i) {
+	public void addItemtransaction(Itemtransaction item) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.save(i);
+		session.save(item);
 		
 	}
 
 	@Override
-	public List<ItemtransactionDto> getItemtransaction() {
+	public List<Itemtransaction> getItemtransaction() {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		List<Itemtransaction> itemtransactionList = session.createQuery("SELECT item FROM itemtransaction item  ").getResultList();
+		return itemtransactionList;
 	}
 
 	@Override
-	public void updateItemtransaction(Itemtransaction i) {
+	public void updateItemtransaction(Itemtransaction item) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteItemtransaction(Itemtransaction i) {
+	public void deleteItemtransaction(Itemtransaction item) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -15,4 +15,6 @@ public interface ProductDao {
 
 	List<ProductDto> getProductHome(String type, int categoryId);
 
+	void updateProduct(Product p);
+
 }

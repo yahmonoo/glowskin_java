@@ -49,6 +49,12 @@ public class ProductController {
 			@RequestParam(name="type",defaultValue = "p")String type,//p,d,b,c // popular,discount,best seller,cateogry
 			@RequestParam(name="categoryId",defaultValue = "0")int categoryId
 			){
+		try {
 		return productService.getProductHome(type,categoryId);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new RuntimeException("Add,Product Error!", e);
+		}
 	}
 }

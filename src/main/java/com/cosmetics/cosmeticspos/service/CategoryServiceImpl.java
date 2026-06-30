@@ -19,9 +19,10 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional(readOnly=true)
 	@Override
 	public List<CategoryDto> getCategory() {
-		List<Category> catList =  categoryDao.getCategory();
+		// TODO Auto-generated method stub
+		List<Category> categoryList =  categoryDao.getCategory();
 		List<CategoryDto> dtoList = new ArrayList<>();
-		for(Category cat:catList) {
+		for(Category cat:categoryList) {
 			CategoryDto dto = new CategoryDto(cat);
 			dtoList.add(dto);
 		}	
@@ -33,18 +34,18 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public int addCategory(CategoryDto dto) {
 		// TODO Auto-generated method stub
-				Category c = new Category(dto);
-				categoryDao.addCategory(c);
-				return c.getCategoryId();
+				Category cat = new Category(dto);
+				categoryDao.addCategory(cat);
+				return cat.getCategoryId();
 	}
 	
 	@Transactional(readOnly=false)
 	@Override
 	public int updateCategory(CategoryDto dto) {
 		// TODO Auto-generated method stub
-		Category  c= new Category(dto);
-		categoryDao.updateCategory(c);
-		return c.getCategoryId();
+		Category  cat= new Category(dto);
+		categoryDao.updateCategory(cat);
+		return cat.getCategoryId();
 		
 	}
 
@@ -53,10 +54,6 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	
-	
-	
 	
 }
 

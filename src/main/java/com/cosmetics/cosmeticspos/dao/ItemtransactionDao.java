@@ -9,12 +9,12 @@ public interface ItemtransactionDao {
 
 //	 List<ItemtransactionDto> getItemtransaction(String search);
 
-	void addItemtransaction(Itemtransaction i);
+	void addItemtransaction(Itemtransaction item);
 
-	List<ItemtransactionDto> getItemtransaction();
+	List<Itemtransaction> getItemtransaction();
 
-	void updateItemtransaction(Itemtransaction i);
+	void updateItemtransaction(Itemtransaction item);
 
-	void deleteItemtransaction(Itemtransaction i);
+	void deleteItemtransaction(Itemtransaction item);
 
 }

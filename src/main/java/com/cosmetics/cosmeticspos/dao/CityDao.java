@@ -7,12 +7,14 @@ import com.cosmetics.cosmeticspos.dto.CityDto;
 
 public interface CityDao {
 
-	List<CityDto> getCity();
+	List<City> getCity();
 
 	void addCity(City c);
 
 	void updateCity(City c);
 
 	void deleteCity(City c);
+
+	
 
 }
