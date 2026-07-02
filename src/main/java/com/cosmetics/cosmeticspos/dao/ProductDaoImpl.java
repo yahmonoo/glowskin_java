@@ -86,8 +86,8 @@ public class ProductDaoImpl implements ProductDao {
 			String title = (String)obj[1];
 			String code = (String)obj[2];
 			String photoOne = (String)obj[3];
-			int rating = Integer.parseInt(obj[4].toString());
-			
+//			int rating = Integer.parseInt(obj[4].toString());
+			int rating = (int) Double.parseDouble(obj[4].toString());
 			ProductDto dto = new ProductDto(photoOne,title,code,priceOne,rating);
 			dtoList.add(dto);
 		}
@@ -100,6 +100,13 @@ public class ProductDaoImpl implements ProductDao {
 	public void updateProduct(Product p) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Product getProductDetail(int productId) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		return session.find(Product.class, productId);
 	}
 
 	

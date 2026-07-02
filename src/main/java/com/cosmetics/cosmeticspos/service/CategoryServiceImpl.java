@@ -15,6 +15,7 @@ import com.cosmetics.cosmeticspos.dto.CategoryDto;
 public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	CategoryDao categoryDao;
+	private int categoryId;
 	
 	@Transactional(readOnly=true)
 	@Override
@@ -49,10 +50,14 @@ public class CategoryServiceImpl implements CategoryService {
 		
 	}
 
+	@Transactional(readOnly=false)
 	@Override
 	public int deleteCategory(CategoryDto dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		Category cat=new Category(dto);
+		cat.setCategoryId(categoryId);
+		categoryDao.deleteCategory(cat);
+		return categoryId;
 	}
 	
 }

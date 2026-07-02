@@ -17,6 +17,8 @@ public interface ProductService {
 
 	List<ProductDto> getProductHome(String type, int categoryId);
 
+	ProductDto getProductDetail(int productId);
+
 	
 
 

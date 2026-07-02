@@ -40,10 +40,11 @@ public class SaleServiceImpl implements SaleService {
 
 	@Transactional(readOnly=false)
 	public int deleteSale(int SaleId) {
-	    SaleDto dto = new SaleDto();
-	    dto.setSaleId(SaleId); 
+//	    SaleDto dto = new SaleDto();
+//	    dto.setSaleId(SaleId); 
 	    
-	    Sale s= new Sale(dto); 
+	    Sale s= new Sale(); 
+	    s.setSaleId(SaleId);
 	    
 	    saleDao.deleteSale(s);
 	    return SaleId;
@@ -53,7 +54,7 @@ public class SaleServiceImpl implements SaleService {
 	
 	public List<SaleDto> getSale() {
 		// TODO Auto-generated method stub
-		List<Sale> saleList = saleDao.getSale();
+		List<Sale> saleList = saleDao.getSale();//
 		List<SaleDto> dtoList = new ArrayList<>();
 		for(Sale s:saleList) {
 		    SaleDto dto = new SaleDto(s);

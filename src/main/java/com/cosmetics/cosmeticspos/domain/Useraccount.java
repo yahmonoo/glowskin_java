@@ -25,6 +25,7 @@ public class Useraccount {
 	private String address;
 	private String userName;
 	private String password;
+	
 	private Date date;
 	private String userType;
 

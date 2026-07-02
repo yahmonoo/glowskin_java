@@ -20,27 +20,27 @@ import com.cosmetics.cosmeticspos.service.RatingService;
 public class RatingController {
 
 	
-	@Autowired
-	RatingService 	ratingService;
-	
-	@GetMapping("rating")
-	public List<RatingDto> getRating(){
-		return ratingService.getRating();
-	}
-	@PostMapping("rating")
-	public int addRating(@RequestBody RatingDto dto){
-		
-		return ratingService.addRating(dto);
-	}
-	@PutMapping("rating")
-	public int updateRating(@RequestBody RatingDto dto){
-		
-		return ratingService.updateRating(dto);
-	}
-	@DeleteMapping("rating")
-	public int deleteRating(@RequestBody RatingDto dto){
-		
-		return ratingService.deleteRating(dto);
-	}
+//	@Autowired
+//	RatingService 	ratingService;
+//	
+//	@GetMapping("rating")
+//	public List<RatingDto> getRating(){
+//		return ratingService.getRating();
+//	}
+//	@PostMapping("rating")
+//	public int addRating(@RequestBody RatingDto dto){
+//		
+//		return ratingService.addRating(dto);
+//	}
+//	@PutMapping("rating")
+//	public int updateRating(@RequestBody RatingDto dto){
+//		
+//		return ratingService.updateRating(dto);
+//	}
+//	@DeleteMapping("rating")
+//	public int deleteRating(@RequestBody RatingDto dto){
+//		
+//		return ratingService.deleteRating(dto);
+//	}
 
 }

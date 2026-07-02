@@ -32,27 +32,18 @@ public class UseraccountDaoImpl  implements UseraccountDao {
 			objectList=session.createNativeQuery(sqlData + orderClause).getResultList();
 		}else
 		{
-			objectList=session.createNativeQuery(sqlData + " WHERE ua.userType = ?1" + orderClause).setParameter(1, userType).getResultList();
+			objectList=session.createNativeQuery(sqlData + " WHERE ua.userType = :userType " + orderClause).setParameter("userType", userType).getResultList();
 		}
 		List<UseraccountDto> userDtoList=new ArrayList<UseraccountDto>();
 		for(Object[] object : objectList) {
 			int userAccountId=Integer.parseInt(object[0].toString());
 			int townshipId=Integer.parseInt(object[1].toString());
-			String townshipName="";
-			if(object[2]!=null) {
-				townshipName=object[2].toString();
-			}
+			String townshipName= (String)object[2];
 
 			String profileName=object[3].toString();
-		    String phone=" ";
-		   if(object[4]!=null) {
-			   phone=object[4].toString();
-		   }
-		   String address="";
-		   if(object[5]!=null) {
-			   address=object[5].toString();
-			   
-		   }
+		    String phone= (String)object[4];
+
+		   String address=(String)object[5];
 		    String userName=object[6].toString();
 		    String password=object[7].toString();
 		    Date date=(Date) object[8];

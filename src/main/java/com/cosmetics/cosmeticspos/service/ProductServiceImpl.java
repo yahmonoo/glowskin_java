@@ -26,15 +26,15 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		Product p = new Product(dto);
 		productDao.addProduct(p);
-		return p.getproductId();
+		return p.getProductId();
 	}
 
 	@Override
 	public int updateProduct(ProductDto dto) {
 		// TODO Auto-generated method stub
-		Product p = new Product(dto);
+		Product p = new Product(dto);//
 		productDao.updateProduct(p);
-		return p.getproductId();
+		return p.getProductId();
 	}
 
 	@Override
@@ -55,5 +55,14 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return productDao.getProductHome(type,categoryId);
 	}
+
+	@Override
+	public ProductDto getProductDetail(int productId) {
+		// TODO Auto-generated method stub
+		Product pro = productDao.getProductDetail(productId);
+		ProductDto dto 	= new ProductDto(pro);//
+		return dto;//productDao.getProductDetail(productId);
+	}
+
 
 }

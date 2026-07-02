@@ -35,5 +35,9 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int categoryId;
 	private String name;
+	public int deleteCategory(Category cat) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 

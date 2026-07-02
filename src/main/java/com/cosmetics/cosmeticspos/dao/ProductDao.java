@@ -17,4 +17,6 @@ public interface ProductDao {
 
 	void updateProduct(Product p);
 
+	Product getProductDetail(int productId);
+
 }

@@ -47,7 +47,8 @@ public class Product {
 					this.discountPriceTwo=dto.getDiscountPriceTwo();
 					this.percent=dto.getPercent();
 					this.normalPriceOne=dto.getNormalPriceOne();
-					this.normalPriceTwo=dto.getDiscountPriceTwo();				
+					this.normalPriceTwo=dto.getDiscountPriceTwo();
+					this.rating=dto.getRating();
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -76,10 +77,7 @@ public class Product {
 	private int percent;
 	private int normalPriceOne;
 	private int normalPriceTwo;
-	public int getproductId() {
-		// TODO Auto-generated method stub
-		return productId;
-	}
+	private int rating;
 	
 	}
 	

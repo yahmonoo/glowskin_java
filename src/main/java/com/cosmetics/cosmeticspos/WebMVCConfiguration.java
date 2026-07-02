@@ -61,7 +61,7 @@ public class WebMVCConfiguration
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
 		
-//		registry.addResourceHandler("/api/v1/productphoto/**").addResourceLocations("file:" + s+ "/productphoto/").setCachePeriod(2592000).resourceChain(true).addResolver(new EncodedResourceResolver());
+		registry.addResourceHandler("/productphoto/**").addResourceLocations("classpath: / static /productphoto/").setCachePeriod(2592000).resourceChain(true).addResolver(new EncodedResourceResolver());
 //		registry.addResourceHandler("/api/v1/brandphoto/**").addResourceLocations("file:" + s+ "/brandphoto/").setCachePeriod(2592000).resourceChain(true).addResolver(new EncodedResourceResolver());
 //		registry.addResourceHandler("/api/v1/productfile/**").addResourceLocations("file:" + s+ "/productfile/").setCachePeriod(2592000).resourceChain(true).addResolver(new EncodedResourceResolver());
 //		registry.addResourceHandler("/api/v1/newsphoto/**").addResourceLocations("file:" + s+ "/newsphoto/").setCachePeriod(2592000).resourceChain(true).addResolver(new EncodedResourceResolver());

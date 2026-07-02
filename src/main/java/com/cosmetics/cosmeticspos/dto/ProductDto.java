@@ -1,5 +1,6 @@
 package com.cosmetics.cosmeticspos.dto;
 
+import com.cosmetics.cosmeticspos.domain.Product;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -18,7 +19,28 @@ public class ProductDto {
 		this.title = title;
 		this.code = code;
 		this.priceOne = priceOne;
-		this.ratingCount = rating;
+		this.rating = rating;
+	}
+	public ProductDto(Product pro) {
+		// TODO Auto-generated constructor stub
+		this.productId = pro.getProductId();
+		this.photoOne = pro.getPhotoOne();
+		this.photoTwo = pro.getPhotoTwo();
+		this.photoThree = pro.getPhotoThree();
+		this.photoFour = pro.getPhotoFour();
+		this.title = pro.getTitle();
+		this.priceOne = pro.getPriceOne();
+		this.priceTwo = pro.getPriceTwo();
+		this.sizeOne = pro.getSizeOne();
+		this.sizeTwo = pro.getSizeTwo();
+		this.colorOne = pro.getColorOne();
+		this.colorTwo = pro.getColorTwo();
+		this.colorThree = pro.getColorThree();
+		this.colorFour = pro.getColorFour();
+		this.code = pro.getCode();
+		this.detail = pro.getDetail();
+	    this.rating=pro.getRating();
+		
 	}
 	private int productId;
 	private int userAccountId;
@@ -45,5 +67,7 @@ public class ProductDto {
 	private int percent;
 	private int normalPriceOne;
 	private int normalPriceTwo;
-	private double ratingCount;
-}
+	private int rating;
+
+	}
+

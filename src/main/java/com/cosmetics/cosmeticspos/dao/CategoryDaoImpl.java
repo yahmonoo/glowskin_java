@@ -19,18 +19,28 @@ public class CategoryDaoImpl implements CategoryDao {
 	SessionFactory sessionFactory;
 
 	@Override
-	public void addCategory(Category c) {
+	public void addCategory(Category cat) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.save(c);
+		session.save(cat);
 		
 	}
 
 	@Override
-	public void updateCategory(Category c) {
+	public void updateCategory(Category cat) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.update(c);
+		session.update(cat);
+	}
+	
+	
+	@Override
+	public void deleteCategory(Category cat) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		 session.createQuery("DELETE FROM category WHERE categoryId= :categoryId")
+			.setParameter("categoryId",cat.getCategoryId()).
+			executeUpdate();	
 	}
 
 	@Override
