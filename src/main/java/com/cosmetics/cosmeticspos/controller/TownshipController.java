@@ -32,8 +32,9 @@ public class TownshipController {
 		
 		return townshipService.addTownship(dto);
 	}
-	@PutMapping("township")
-	public TownshipDto updateTownship(@RequestBody TownshipDto dto){
+	@PutMapping("township/{townshipId}")
+	public TownshipDto updateTownship(@PathVariable("townshipId")int townshipId,
+			@RequestBody TownshipDto dto){
 		
 		return townshipService.updateTownship(dto);
 	}

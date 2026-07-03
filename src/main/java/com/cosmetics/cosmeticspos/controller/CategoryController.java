@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,15 +30,16 @@ public class CategoryController {
 		
 		return categoryService.addCategory(dto);
 	}
-	@PutMapping("category")
-	public int updateCategory(@RequestBody CategoryDto dto){
-		
-		return categoryService.updateCategory(dto);
+	@PutMapping("category/{categoryId}")
+	public CategoryDto updateCategory(@PathVariable("categoryId")int categoryId,@RequestBody CategoryDto dto){
+		dto.setCategoryId(categoryId);
+		categoryService.updateCategory(dto);
+		return dto;
 	}
-	@DeleteMapping("category")
-	public int deleteCategory(@RequestBody CategoryDto dto){
-		
-		return categoryService.deleteCategory(dto);
+	@DeleteMapping("category/{categoryId}")
+	public int deleteUsers(
+			@PathVariable("categoryId")int categoryId){
+		return categoryService.deleteCategory(categoryId);
 	}
 
 }

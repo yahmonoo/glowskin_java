@@ -12,7 +12,9 @@ public interface CategoryService {
 
 	int updateCategory(CategoryDto dto);
 
-	int deleteCategory(CategoryDto dto);
+	int deleteCategory(int categoryId);
+
+	
 
 	
 

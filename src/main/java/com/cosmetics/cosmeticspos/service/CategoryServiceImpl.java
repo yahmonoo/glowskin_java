@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.cosmetics.cosmeticspos.dao.CategoryDao;
 import com.cosmetics.cosmeticspos.domain.Category;
 import com.cosmetics.cosmeticspos.dto.CategoryDto;
@@ -15,7 +16,7 @@ import com.cosmetics.cosmeticspos.dto.CategoryDto;
 public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	CategoryDao categoryDao;
-	private int categoryId;
+
 	
 	@Transactional(readOnly=true)
 	@Override
@@ -50,12 +51,14 @@ public class CategoryServiceImpl implements CategoryService {
 		
 	}
 
+
 	@Transactional(readOnly=false)
 	@Override
-	public int deleteCategory(CategoryDto dto) {
+	public int deleteCategory(int categoryId) {
 		// TODO Auto-generated method stub
-		Category cat=new Category(dto);
+		Category cat = new Category();
 		cat.setCategoryId(categoryId);
+		cat.setName("");
 		categoryDao.deleteCategory(cat);
 		return categoryId;
 	}

@@ -21,7 +21,7 @@ public class Township {
 		// TODO Auto-generated constructor stub
 		this.townshipId = dto.getTownshipId();
 		this.townshipName = dto.getTownshipName();
-		this.cityId=dto.getCityId();
+		this.cityId=dto.getCityDto().getCityId();
 	}
 	public int getTownshipId() {
 		return townshipId;

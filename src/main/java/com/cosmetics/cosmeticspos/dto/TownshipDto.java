@@ -16,15 +16,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TownshipDto {
 	private int townshipId;
-	private int cityId;
+	private CityDto cityDto;
 	private String townshipName;
 
 public TownshipDto(Township township) {
 	this.townshipId=township.getTownshipId();
-	this.cityId=township.getCityId();
+	
+	this.cityDto = new CityDto(township.getCityId());
 	this.townshipName=township.getTownshipName();
 	
 	
+}
+
+public TownshipDto(int townshipId, String townshipName) {
+	// TODO Auto-generated constructor stub
+	this.townshipId = townshipId;
+	this.townshipName = townshipName;
 }
 
 }

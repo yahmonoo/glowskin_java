@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.cosmetics.cosmeticspos.dao.ItemtransactionDao;
+import com.cosmetics.cosmeticspos.domain.Category;
 import com.cosmetics.cosmeticspos.domain.City;
 import com.cosmetics.cosmeticspos.domain.Itemtransaction;
 import com.cosmetics.cosmeticspos.domain.Product;
+import com.cosmetics.cosmeticspos.dto.CategoryDto;
 import com.cosmetics.cosmeticspos.dto.CityDto;
 import com.cosmetics.cosmeticspos.dto.ItemtransactionDto;
 import com.cosmetics.cosmeticspos.dto.ProductDto;
@@ -20,22 +22,19 @@ import com.cosmetics.cosmeticspos.dto.ProductDto;
 public class ItemtransactionServiceImpl implements ItemtransactionService {
 	@Autowired
 	ItemtransactionDao itemtransactionDao;
-	public List<Itemtransaction> getItemtransaction(String search) {
-		// TODO Auto-generated method stub
-		return itemtransactionDao.getItemtransaction();
+	
+	@Transactional(readOnly=true)
+	@Override
+	public List<ItemtransactionDto> getItemtransaction() {
+		List<Itemtransaction> itemtransactionList = itemtransactionDao.getItemtransaction();
+		List<ItemtransactionDto> dtoList = new ArrayList<>();
+		for(Itemtransaction item:itemtransactionList) {
+			ItemtransactionDto dto = new ItemtransactionDto(item);
+			dtoList.add(dto);
+		}
+		return dtoList;	
 	}
-
-//	@Transactional(readOnly=true)
-//	@Override
-//	public List<ItemtransactionDto> getItemtransaction() {
-//		List<Itemtransaction> itemtransactionList = itemtransactionDao.getItemtransaction();
-//		List<ItemtransactionDto> dtoList = new ArrayList<>();
-//		for(Itemtransaction item:itemtransactionList) {
-//			ItemtransactionDto dto = new ItemtransactionDto(item);
-//			dtoList.add(dto);
-//		}
-//		return dtoList;	
-//	}
+	
 
 	@Transactional(readOnly=false)
 	@Override
@@ -45,7 +44,9 @@ public class ItemtransactionServiceImpl implements ItemtransactionService {
 		itemtransactionDao.addItemtransaction(i);
 		return i.getItemTransactionId();
 	}
+	
 
+	
 	@Transactional(readOnly=false)
 	@Override
 	public int updateItemtransaction(ItemtransactionDto dto) {
@@ -66,10 +67,4 @@ public class ItemtransactionServiceImpl implements ItemtransactionService {
 		return itemTransactionId;
 	}
 
-	@Override
-	public List<ItemtransactionDto> getItemtransaction() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

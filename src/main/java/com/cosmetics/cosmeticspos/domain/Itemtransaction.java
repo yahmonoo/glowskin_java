@@ -48,7 +48,7 @@ public class Itemtransaction {
 		return itemTransactionId;
 	}
 	
-	}
+}
 	
 	
 	

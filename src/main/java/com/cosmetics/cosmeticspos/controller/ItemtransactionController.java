@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,15 +34,16 @@ public class ItemtransactionController {
 		
 		return itemtransactionService.addItemtransaction(dto);
 	}
-	@PutMapping("itemtransaction")
-	public int updateItemtransaction(@RequestBody ItemtransactionDto dto){
-		
-		return itemtransactionService.updateItemtransaction(dto);
+	@PutMapping("itemtransaction/{itemtransactionId}")
+	public ItemtransactionDto updateItemtransaction(@PathVariable("itemtransactionId")int itemtransactionId,@RequestBody ItemtransactionDto dto){
+		dto.setItemTransactionId(itemtransactionId);
+		itemtransactionService.updateItemtransaction(dto);
+		return dto;
 	}
-	@DeleteMapping("itemtransaction")
-	public int deleteItemtransaction(@RequestBody ItemtransactionDto dto){
-		
-		return 0;//itemtransactionService.addItemtransaction(dto);
+	@DeleteMapping("itemtransaction/{itemtransactionId}")
+	public int deleteUsers(
+			@PathVariable("itemtransactionId")int itemtransactionId){
+		return itemtransactionService.deleteItemtransaction(itemtransactionId);
 	}
 
 }

@@ -18,6 +18,10 @@ public class CityDto {
 		this.cityId = c.getCityId();
 		this.cityName = c.getCityName();
 	}
+	public CityDto(int cityId) {
+		// TODO Auto-generated constructor stub
+		this.cityId = cityId;
+	}
 	private int cityId;
 	private String cityName;
 }

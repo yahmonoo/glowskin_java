@@ -56,6 +56,7 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getProductHome(type,categoryId);
 	}
 
+	@Transactional(readOnly=true)
 	@Override
 	public ProductDto getProductDetail(int productId) {
 		// TODO Auto-generated method stub

@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cosmetics.cosmeticspos.dto.CategoryDto;
 import com.cosmetics.cosmeticspos.dto.CityDto;
 import com.cosmetics.cosmeticspos.service.CityService;
 
@@ -30,14 +32,16 @@ public class CityController {
 		
 		return cityService.addCity(dto);
 	}
-	@PutMapping("city")
-	public int updateCity(@RequestBody CityDto dto){
-		
-		return cityService.updateCity(dto);
+	@PutMapping("city/{cityId}")
+	public CityDto updateCity(@PathVariable("cityId")int cityId,@RequestBody CityDto dto){
+		dto.setCityId(cityId);
+		cityService.updateCity(dto);
+		return dto;
 	}
-	@DeleteMapping("city")
-	public int deleteCity(@RequestBody CityDto dto){
-		
-		return cityService.deleteCity(dto);
+	@DeleteMapping("city/{cityId}")
+	public int deleteUsers(
+			@PathVariable("cityId")int cityId){
+		return cityService.deleteCity(cityId);
 	}
+
 }

@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cosmetics.cosmeticspos.domain.Category;
 import com.cosmetics.cosmeticspos.domain.City;
 import com.cosmetics.cosmeticspos.dto.CityDto;
 
@@ -15,57 +16,40 @@ import com.cosmetics.cosmeticspos.dto.CityDto;
 public class CityDaoImpl implements CityDao {
 	@Autowired
 	SessionFactory sessionFactory;
-
-//	@Override
-//	public List<CityDto> getCity(String search) {
-//	    Session session = sessionFactory.getCurrentSession();
-//	    
-//	    List<Object[]> objList = session.createQuery(
-//	            "SELECT c.cityId, c.cityName FROM City c WHERE c.cityName LIKE :search", Object[].class)
-//	            .setParameter("search", "%" + search + "%") 
-//	            .getResultList();
-//	    
-//	    List<CityDto> dtoList = new ArrayList<>();
-//	    for(Object[] obj : objList) {
-//	        
-//	        int cityId = ((Number) obj[0]).intValue(); 
-//	        String name = (String) obj[1];
-//	        
-//	        CityDto dto = new CityDto(cityId, name);
-//	        dtoList.add(dto);
-//	    }
-//	    
-//	    
-//	    return dtoList;
-//	}
-
 	
 	@Override
 	public List<City> getCity() {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		List<City> cityList = session.createQuery(" select c from City c order by c.cityName ASC ").getResultList();
-		return cityList;
-	}
-
-	@Override
-	public void addCity(City ct) {
-		Session session = sessionFactory.getCurrentSession();
-		session.save(ct);
+		return session.createQuery(" select c from City c order by c.cityName " ,City.class).getResultList();
 		
 	}
 
 	@Override
-	public void updateCity(City ct) {
+	public void addCity(City c) {
 		Session session = sessionFactory.getCurrentSession();
-		session.update(ct);
+		session.save(c);
 		
 	}
 
 	@Override
-	public void deleteCity(City ct) {
+	public void updateCity(City c) {
+		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.delete(ct);
+		session.createQuery("UPDATE City SET cityName = :cityName WHERE cityId = :cityId")
+        .setParameter("cityName", c.getCityName())
+        .setParameter("cityId", c.getCityId())
+        .executeUpdate();
 	}
+	
 
+	@Override
+	public void deleteCity(City c) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		 session.createQuery("DELETE FROM City WHERE cityId= :cityId")
+			.setParameter("cityId",c.getCityId())
+			.executeUpdate();	
+
+}
 }

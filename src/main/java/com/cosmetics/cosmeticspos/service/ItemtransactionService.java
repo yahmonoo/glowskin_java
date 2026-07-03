@@ -10,12 +10,10 @@ public interface ItemtransactionService {
 
 	int addItemtransaction(ItemtransactionDto dto);
 
-	int updateItemtransaction(ItemtransactionDto dto);
-
 	int deleteItemtransaction(int itemTransactionId);
+
 	
+
+	int updateItemtransaction(ItemtransactionDto dto);
 	
-
-
-
 }

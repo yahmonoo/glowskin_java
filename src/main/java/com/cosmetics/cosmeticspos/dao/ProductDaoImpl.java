@@ -73,7 +73,7 @@ public class ProductDaoImpl implements ProductDao {
 //					.getResultList();
 		}
 		
-		objList = session.createNativeQuery("SELECT p.priceOne,p.title ,p.`code`, p.photoOne,p.rating\r\n"
+		objList = session.createNativeQuery("SELECT p.priceOne,p.title ,p.`code`, p.photoOne,p.rating,p.productId\r\n"
 				+ "FROM product p\r\n"
 				+ sqlWhere
 				+ sqlOrderBy)
@@ -86,9 +86,11 @@ public class ProductDaoImpl implements ProductDao {
 			String title = (String)obj[1];
 			String code = (String)obj[2];
 			String photoOne = (String)obj[3];
-//			int rating = Integer.parseInt(obj[4].toString());
+			//int rating = Integer.parseInt(obj[4].toString());
 			int rating = (int) Double.parseDouble(obj[4].toString());
+			int productId = Integer.parseInt(obj[5].toString());
 			ProductDto dto = new ProductDto(photoOne,title,code,priceOne,rating);
+			dto.setProductId(productId);
 			dtoList.add(dto);
 		}
 		

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cosmetics.cosmeticspos.domain.Township;
+import com.cosmetics.cosmeticspos.dto.CityDto;
 import com.cosmetics.cosmeticspos.dto.TownshipDto;
 
 @Repository
@@ -62,7 +63,8 @@ public class TownshipDaoImpl implements TownshipDao {
 			int townshipId=Integer.parseInt(object[0].toString());
 			String townshipName=object[1].toString();
 			int cityId=Integer.parseInt(object[2].toString());
-			TownshipDto dto =new TownshipDto(townshipId,cityId,townshipName);
+			TownshipDto dto =new TownshipDto(townshipId,townshipName);
+			dto.setCityDto(new CityDto(cityId));
 			townshipDtoList.add(dto);
 		}
 
