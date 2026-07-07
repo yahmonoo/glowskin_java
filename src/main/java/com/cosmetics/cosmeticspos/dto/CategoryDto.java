@@ -24,6 +24,10 @@ public class CategoryDto {
 		this.name=cat.getName();
 	}
 	
+	public CategoryDto(int categoryId2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	private int categoryId;
 	private String name;
 }

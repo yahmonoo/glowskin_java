@@ -8,7 +8,7 @@ public interface ProductService {
 
 	List<ProductDto> getProduct();
 
-	int addProduct(ProductDto dto);
+	ProductDto addProduct(ProductDto dto);
 
 
 	int updateProduct(ProductDto dto);

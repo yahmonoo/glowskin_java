@@ -25,7 +25,7 @@ public class Product {
 		// TODO Auto-generated constructor stub
 					this.productId=dto.getProductId();
 					this.userAccountId=dto.getUserAccountId();
-					this.categoryId=dto.getCategoryId();
+					this.categoryId=dto.getCategory().getCategoryId();
 					this.type=dto.getType();
 					this.photoOne=dto.getPhotoOne();
 					this.photoTwo=dto.getPhotoTwo();

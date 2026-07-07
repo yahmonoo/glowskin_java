@@ -1,5 +1,6 @@
 package com.cosmetics.cosmeticspos.dto;
 
+import com.cosmetics.cosmeticspos.domain.Category;
 import com.cosmetics.cosmeticspos.domain.Product;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -19,6 +20,7 @@ public class ProductDto {
 		this.title = title;
 		this.code = code;
 		this.priceOne = priceOne;
+		
 		this.rating = rating;
 	}
 	public ProductDto(Product pro) {
@@ -40,11 +42,12 @@ public class ProductDto {
 		this.code = pro.getCode();
 		this.detail = pro.getDetail();
 	    this.rating=pro.getRating();
+//	    this.categorydto=new CategoryDto(pro.getCategoryId());
 		
 	}
 	private int productId;
-	private int userAccountId;
-	private int categoryId;
+	private UseraccountDto userAccountdto;
+	private CategoryDto categorydto;
 	private int type;
 	private String photoOne;
 	private String photoTwo;
@@ -68,6 +71,14 @@ public class ProductDto {
 	private int normalPriceOne;
 	private int normalPriceTwo;
 	private int rating;
-
+	public Product getCategory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public int getUserAccountId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	}
 

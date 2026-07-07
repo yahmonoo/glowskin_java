@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cosmetics.cosmeticspos.domain.Product;
+import com.cosmetics.cosmeticspos.dto.CategoryDto;
 import com.cosmetics.cosmeticspos.dto.ProductDto;
 
 
@@ -21,6 +22,7 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public List<ProductDto> getProduct(String search) {
 		// TODO Auto-generated method stub
+		//a
 		return null;
 	}
 
@@ -33,7 +35,53 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public List<ProductDto> getProduct() {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		List<Object[]> objList = new ArrayList<>();
+		String sqlWhere = " Where 1=1 ";
+		String sqlOrderBy = "";
+		
+		
+		objList = session.createNativeQuery("SELECT p.priceOne,p.title ,p.`code`, p.photoOne,p.rating,p.productId,p.categoryId,\r\n"
+				+ "p.discountPriceOne,p.normalPriceOne,p.percent, c.`name` AS categoryName,p.detail\r\n"
+				+ "FROM product p\r\n"
+				+ "LEFT JOIN category c ON p.categoryId = c.categoryId\r\n"
+				+ sqlWhere
+				+ sqlOrderBy)
+				.getResultList();
+		List<ProductDto> dtoList = new ArrayList<>();
+
+		for(Object[] obj:objList) {
+			int priceOne = Integer.parseInt(obj[0].toString());
+			
+			String title = (String)obj[1];
+			String code = (String)obj[2];
+			String photoOne = (String)obj[3];
+			//int rating = Integer.parseInt(obj[4].toString());
+			int rating = (int) Double.parseDouble(obj[4].toString());
+			int productId = Integer.parseInt(obj[5].toString());
+			int categoryId = Integer.parseInt(obj[6].toString());
+			int discountPriceOne = Integer.parseInt(obj[7].toString());
+			int normalPriceOne = Integer.parseInt(obj[8].toString());
+			int percent = Integer.parseInt(obj[9].toString());
+			String categoryName = (String)obj[10];
+			String detail = (String)obj[11];
+
+			
+
+			ProductDto dto = new ProductDto(photoOne,title,code,priceOne,rating);
+			
+			dto.setProductId(productId);
+			dto.setDiscountPriceOne(discountPriceOne);
+			dto.setNormalPriceOne(normalPriceOne);
+			dto.setPercent(percent);
+			dto.setDetail(detail);
+			
+			dto.setCategorydto(new CategoryDto(categoryId,categoryName));
+			dtoList.add(dto);
+		}
+		
+		
+		return dtoList;
 	}
 
 	@Override
@@ -73,8 +121,10 @@ public class ProductDaoImpl implements ProductDao {
 //					.getResultList();
 		}
 		
-		objList = session.createNativeQuery("SELECT p.priceOne,p.title ,p.`code`, p.photoOne,p.rating,p.productId\r\n"
+		objList = session.createNativeQuery("SELECT p.priceOne,p.title ,p.`code`, p.photoOne,p.rating,p.productId,p.categoryId,\r\n"
+				+ "p.discountPriceOne,p.normalPriceOne,p.percent, c.`name` AS categoryName\r\n"
 				+ "FROM product p\r\n"
+				+ "LEFT JOIN category c ON p.categoryId = c.categoryId\r\n"
 				+ sqlWhere
 				+ sqlOrderBy)
 				.getResultList();
@@ -89,8 +139,20 @@ public class ProductDaoImpl implements ProductDao {
 			//int rating = Integer.parseInt(obj[4].toString());
 			int rating = (int) Double.parseDouble(obj[4].toString());
 			int productId = Integer.parseInt(obj[5].toString());
+			categoryId = Integer.parseInt(obj[6].toString());
+			int discountPriceOne = Integer.parseInt(obj[7].toString());
+			int normalPriceOne = Integer.parseInt(obj[8].toString());
+			int percent = Integer.parseInt(obj[9].toString());
+			String categoryName = (String)obj[10];
+
 			ProductDto dto = new ProductDto(photoOne,title,code,priceOne,rating);
+			
 			dto.setProductId(productId);
+			dto.setDiscountPriceOne(discountPriceOne);
+			dto.setNormalPriceOne(normalPriceOne);
+			dto.setPercent(percent);
+			
+			dto.setCategorydto(new CategoryDto(categoryId,categoryName));
 			dtoList.add(dto);
 		}
 		

@@ -56,15 +56,19 @@ public class TownshipDaoImpl implements TownshipDao {
 	public List<TownshipDto> getTownship() {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
-		String sqlData="SELECT t.townshipid,t.townshipname,t.cityid FROM township t ORDER BY t.townshipname ASC";
+		String sqlData="SELECT t.townshipid,t.townshipname,t.cityId,c.cityName "
+				+ " FROM township t "
+				+ " left join city c on c.cityId = t.cityId "
+				+ " ORDER BY t.townshipname ASC";
 		List<Object[]> objectList=session.createNativeQuery(sqlData).getResultList();
 		List<TownshipDto> townshipDtoList=new ArrayList<TownshipDto>();
 		for(Object[] object: objectList) {
 			int townshipId=Integer.parseInt(object[0].toString());
-			String townshipName=object[1].toString();
+			String townshipName= (String)object[1];
 			int cityId=Integer.parseInt(object[2].toString());
+			String cityName = (String)object[3];
 			TownshipDto dto =new TownshipDto(townshipId,townshipName);
-			dto.setCityDto(new CityDto(cityId));
+			dto.setCityDto(new CityDto(cityId,cityName));
 			townshipDtoList.add(dto);
 		}
 

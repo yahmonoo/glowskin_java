@@ -15,18 +15,20 @@ import com.cosmetics.cosmeticspos.dto.ProductDto;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductDao productDao;
-	
-	public List<ProductDto> getProduct(String search) {
-		// TODO Auto-generated method stub
-		return productDao.getProduct(search);
-	}
-
+	@Transactional(readOnly=true)
 	@Override
-	public int addProduct(ProductDto dto) {
+	public List<ProductDto> getProduct() {
+		// TODO Auto-generated method stub
+		return productDao.getProduct();
+	}
+	
+	@Transactional(readOnly=false)
+	@Override
+	public ProductDto addProduct(ProductDto dto) {
 		// TODO Auto-generated method stub
 		Product p = new Product(dto);
 		productDao.addProduct(p);
-		return p.getProductId();
+		return dto;
 	}
 
 	@Override
@@ -42,12 +44,8 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	@Transactional(readOnly=true)
-	@Override
-	public List<ProductDto> getProduct() {
-		// TODO Auto-generated method stub
-		return productDao.getProduct();
-	}
+	
+	
 
 	@Transactional(readOnly=true)
 	@Override

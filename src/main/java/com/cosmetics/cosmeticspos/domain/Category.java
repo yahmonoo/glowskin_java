@@ -39,5 +39,9 @@ public class Category {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public Category(int categoryId2) {
+		// TODO Auto-generated constructor stub
+		this.categoryId = categoryId2;
+	}
 }
 
