@@ -47,7 +47,7 @@ public class ProductDto {
 	}
 	private int productId;
 	private UseraccountDto userAccountdto;
-	private CategoryDto categorydto;
+	private CategoryDto category;
 	private int type;
 	private String photoOne;
 	private String photoTwo;
@@ -71,14 +71,14 @@ public class ProductDto {
 	private int normalPriceOne;
 	private int normalPriceTwo;
 	private int rating;
-	public Product getCategory() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public int getUserAccountId() {
+	public int getuserAccountId() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public int getCategoryId() {
+		// TODO Auto-generated method stub
+		return 0;
 	
 	}
+}
 

@@ -77,7 +77,7 @@ public class ProductDaoImpl implements ProductDao {
 			dto.setPercent(percent);
 			dto.setDetail(detail);
 			
-			dto.setCategorydto(new CategoryDto(categoryId,categoryName));
+			dto.setCategory(new CategoryDto(categoryId,categoryName));
 			dtoList.add(dto);
 		}
 		
@@ -153,7 +153,7 @@ public class ProductDaoImpl implements ProductDao {
 			dto.setNormalPriceOne(normalPriceOne);
 			dto.setPercent(percent);
 			
-			dto.setCategorydto(new CategoryDto(categoryId,categoryName));
+			dto.setCategory(new CategoryDto(categoryId,categoryName));
 			dtoList.add(dto);
 		}
 		
