@@ -30,6 +30,7 @@ public class ProductDaoImpl implements ProductDao {
 	public void addProduct(Product p) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
+		session.save(p);
 	}
 
 	@Override
@@ -163,6 +164,8 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public void updateProduct(Product p) {
 		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		session.update(p);
 		
 	}
 
@@ -171,6 +174,15 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		return session.find(Product.class, productId);
+	}
+
+	@Override
+	public void deleteProduct(Product p) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		 session.createQuery("DELETE FROM Product WHERE productId= :productId")
+			.setParameter("productId",p.getProductId())
+			.executeUpdate();	
 	}
 
 	

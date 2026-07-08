@@ -8,12 +8,12 @@ public interface ProductService {
 
 	List<ProductDto> getProduct();
 
-	ProductDto addProduct(ProductDto dto);
+	int addProduct(ProductDto dto);
 
 
 	int updateProduct(ProductDto dto);
 
-	int deleteProduct(ProductDto dto);
+	int deleteProduct(int productId);
 
 	List<ProductDto> getProductHome(String type, int categoryId);
 

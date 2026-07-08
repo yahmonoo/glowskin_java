@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cosmetics.cosmeticspos.dao.ProductDao;
+import com.cosmetics.cosmeticspos.domain.City;
 import com.cosmetics.cosmeticspos.domain.Product;
 import com.cosmetics.cosmeticspos.dto.ProductDto;
 
@@ -24,13 +25,14 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Transactional(readOnly=false)
 	@Override
-	public ProductDto addProduct(ProductDto dto) {
+	public int addProduct(ProductDto dto) {
 		// TODO Auto-generated method stub
 		Product p = new Product(dto);
 		productDao.addProduct(p);
-		return dto;
+		return p.getProductId();
 	}
 
+	@Transactional(readOnly=false)
 	@Override
 	public int updateProduct(ProductDto dto) {
 		// TODO Auto-generated method stub
@@ -39,10 +41,14 @@ public class ProductServiceImpl implements ProductService {
 		return p.getProductId();
 	}
 
+	@Transactional(readOnly=false)
 	@Override
-	public int deleteProduct(ProductDto dto) {
+	public int deleteProduct(int productId) {
 		// TODO Auto-generated method stub
-		return 0;
+		Product p = new Product();
+		p.setProductId(productId);
+		productDao.deleteProduct(p);
+		return productId;
 	}
 	
 	

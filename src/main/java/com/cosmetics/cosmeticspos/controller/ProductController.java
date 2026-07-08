@@ -31,19 +31,19 @@ public class ProductController {
 		return productService.getProduct();
 	}
 	@PostMapping("product")
-	public ProductDto addProduct(@RequestBody ProductDto dto){
+	public int addProduct(@RequestBody ProductDto dto){
 		
 		return productService.addProduct(dto);
 	}
-	@PutMapping("product")
-	public int updateProduct(@RequestBody ProductDto dto){
-		
+	@PutMapping("product/{productId}")
+	public int updateProduct(@PathVariable("productId")int productId,@RequestBody ProductDto dto){
+		dto.setProductId(productId);
 		return productService.updateProduct(dto);
 	}
-	@DeleteMapping("product")
-	public int deleteProduct(@RequestBody ProductDto dto){
+	@DeleteMapping("product/{productId}")
+	public int deleteProduct(@PathVariable("productId")int productId){
 		
-		return productService.deleteProduct(dto);
+		return productService.deleteProduct(productId);
 	}
 	@GetMapping("product/home")
 	public List<ProductDto> getProductHome(

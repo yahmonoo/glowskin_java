@@ -19,4 +19,6 @@ public interface ProductDao {
 
 	Product getProductDetail(int productId);
 
+	void deleteProduct(Product p);
+
 }
