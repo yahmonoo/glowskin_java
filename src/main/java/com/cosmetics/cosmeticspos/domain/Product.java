@@ -25,8 +25,9 @@ public class Product {
 	public Product(ProductDto dto) {
 		// TODO Auto-generated constructor stub
 					this.productId=dto.getProductId();
-					this.userAccountId=dto.getuserAccountId();
-					this.categoryId=dto.getCategory().getCategoryId();
+					this.userAccountId=1;
+					
+				this.categoryId=dto.getCategorydto().getCategoryId();
 					this.type=dto.getType();
 					this.photoOne=dto.getPhotoOne();
 					this.photoTwo=dto.getPhotoTwo();
@@ -48,8 +49,9 @@ public class Product {
 					this.discountPriceTwo=dto.getDiscountPriceTwo();
 					this.percent=dto.getPercent();
 					this.normalPriceOne=dto.getNormalPriceOne();
-					this.normalPriceTwo=dto.getDiscountPriceTwo();
+					this.normalPriceTwo=dto.getNormalPriceTwo();
 					this.rating=dto.getRating();
+//					this.categoryId = dto.getCategoryId();
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

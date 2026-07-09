@@ -27,9 +27,9 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int addProduct(ProductDto dto) {
 		// TODO Auto-generated method stub
-		Product p = new Product(dto);
-		productDao.addProduct(p);
-		return p.getProductId();
+		Product p = new Product(dto); 
+	    productDao.addProduct(p);
+	    return p.getProductId();
 	}
 
 	@Transactional(readOnly=false)
@@ -64,8 +64,8 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductDto getProductDetail(int productId) {
 		// TODO Auto-generated method stub
-		Product pro = productDao.getProductDetail(productId);
-		ProductDto dto 	= new ProductDto(pro);//
+		Product p = productDao.getProductDetail(productId);
+		ProductDto dto 	= new ProductDto(p);//
 		return dto;//productDao.getProductDetail(productId);
 	}
 

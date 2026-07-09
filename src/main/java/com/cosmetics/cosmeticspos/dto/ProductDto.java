@@ -23,31 +23,38 @@ public class ProductDto {
 		
 		this.rating = rating;
 	}
-	public ProductDto(Product pro) {
+	public ProductDto(Product p) {
 		// TODO Auto-generated constructor stub
-		this.productId = pro.getProductId();
-		this.photoOne = pro.getPhotoOne();
-		this.photoTwo = pro.getPhotoTwo();
-		this.photoThree = pro.getPhotoThree();
-		this.photoFour = pro.getPhotoFour();
-		this.title = pro.getTitle();
-		this.priceOne = pro.getPriceOne();
-		this.priceTwo = pro.getPriceTwo();
-		this.sizeOne = pro.getSizeOne();
-		this.sizeTwo = pro.getSizeTwo();
-		this.colorOne = pro.getColorOne();
-		this.colorTwo = pro.getColorTwo();
-		this.colorThree = pro.getColorThree();
-		this.colorFour = pro.getColorFour();
-		this.code = pro.getCode();
-		this.detail = pro.getDetail();
-	    this.rating=pro.getRating();
+		this.productId = p.getProductId();
+		this.photoOne = p.getPhotoOne();
+		this.photoTwo = p.getPhotoTwo();
+		this.photoThree = p.getPhotoThree();
+		this.photoFour = p.getPhotoFour();
+		this.title = p.getTitle();
+		this.priceOne = p.getPriceOne();
+		this.priceTwo = p.getPriceTwo();
+		this.sizeOne = p.getSizeOne();
+		this.sizeTwo = p.getSizeTwo();
+		this.colorOne = p.getColorOne();
+		this.colorTwo = p.getColorTwo();
+		this.colorThree = p.getColorThree();
+		this.colorFour = p.getColorFour();
+		this.code = p.getCode();
+		this.detail = p.getDetail();
+	    this.rating=p.getRating();
+	    this.discountPriceOne = p.getDiscountPriceOne();
+        this.discountPriceTwo = p.getDiscountPriceTwo();
+        this.normalPriceOne = p.getNormalPriceOne();
+        this.normalPriceTwo = p.getNormalPriceTwo();
+        this.percent = p.getPercent();
+        this.type = p.getType();
+        this.count = p.getCount();
 //	    this.categorydto=new CategoryDto(pro.getCategoryId());
 		
 	}
 	private int productId;
 	private UseraccountDto userAccountdto;
-	private CategoryDto category;
+	private CategoryDto categorydto;
 	private int type;
 	private String photoOne;
 	private String photoTwo;
@@ -78,7 +85,6 @@ public class ProductDto {
 	public int getCategoryId() {
 		// TODO Auto-generated method stub
 		return 0;
-	
 	}
-}
+	}
 
