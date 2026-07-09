@@ -14,5 +14,7 @@ public interface UseraccountDao {
 
 		void deleteUseraccount(int userAccountId);
 
+		Useraccount getLogin(String userName, String password);
+
 
 }

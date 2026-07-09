@@ -71,6 +71,7 @@ public class ProductDto {
 	private int normalPriceOne;
 	private int normalPriceTwo;
 	private int rating;
+	private String colorBox;//non , lip
 	public Product getCategory() {
 		// TODO Auto-generated method stub
 		return null;

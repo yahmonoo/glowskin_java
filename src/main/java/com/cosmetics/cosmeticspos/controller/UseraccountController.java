@@ -43,5 +43,10 @@ public class UseraccountController {
 		
 		return useraccountService.deleteUseraccount(useraccountId);
 	}
+	@GetMapping("useraccount/login")
+	public UseraccountDto getLogin(@RequestParam("userName") String userName,
+			@RequestParam("password") String password){
+		return useraccountService.getLogin(userName,password);
+	}
 
 }

@@ -83,6 +83,21 @@ public class UseraccountDaoImpl  implements UseraccountDao {
 		
 	}
 
+	@Override
+	public Useraccount getLogin(String userName, String password) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		List<Useraccount> userList = session.createQuery("select u from Useraccount u where "
+				+ " u.userName = :userName AND u.password = :password ")
+		.setParameter("userName", userName)
+		.setParameter("password", password).getResultList();
+		Useraccount ua = new Useraccount();
+		if(userList.size()>0) {
+			ua = userList.get(0);
+		}
+		return ua;
+	}
+
 
 	
 

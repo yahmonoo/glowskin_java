@@ -4,6 +4,7 @@ package com.cosmetics.cosmeticspos.dto;
 
 import java.util.Date;
 
+import com.cosmetics.cosmeticspos.domain.Useraccount;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -21,7 +22,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UseraccountDto {
 
-//	public UseraccountDto(int userAccountId, int townshipId, String townshipName, String profileName, String phone,
+public UseraccountDto(Useraccount ua) {
+		// TODO Auto-generated constructor stub
+	this.userAccountId = ua.getUseraccountId();
+	this.profileName = ua.getProfileName();
+	this.address = ua.getAddress();
+	this.phone = ua.getPhone();
+	this.userType = ua.getUserType();
+	}
+	//	public UseraccountDto(int userAccountId, int townshipId, String townshipName, String profileName, String phone,
 //			String address, String userName, String password, Date date, String userType) {
 //		
 //		// TODO Auto-generated constructor stub

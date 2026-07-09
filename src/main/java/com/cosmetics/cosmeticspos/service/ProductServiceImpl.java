@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getProduct();
 	}
 	
-	@Transactional(readOnly=false)
+	@Transactional
 	@Override
 	public int addProduct(ProductDto dto) {
 		// TODO Auto-generated method stub

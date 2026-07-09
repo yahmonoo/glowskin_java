@@ -30,6 +30,7 @@ public class UseraccountServiceImpl  implements UseraccountService{
 		// TODO Auto-generated method stub
 		Useraccount ua = new Useraccount(dto);
 		useraccountDao.addUseraccount(ua);
+		dto.setUserAccountId(ua.getUseraccountId());
 				return dto;
 	}
 	@Override
@@ -49,6 +50,15 @@ public class UseraccountServiceImpl  implements UseraccountService{
 		// TODO Auto-generated method stub
 		useraccountDao.deleteUseraccount(useraccountId);
 		return useraccountId;
+	}
+	
+	@Transactional(readOnly=true)
+	@Override
+	public UseraccountDto getLogin(String userName, String password) {
+		// TODO Auto-generated method stub
+		Useraccount ua = useraccountDao.getLogin(userName,password);
+		
+		return new UseraccountDto(ua);
 	}
 
 	

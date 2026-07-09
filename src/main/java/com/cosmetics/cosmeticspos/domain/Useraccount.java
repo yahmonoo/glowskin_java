@@ -42,6 +42,10 @@ public class Useraccount {
 		this.userType=dto.getUserType();
 	}
 
+	public Useraccount() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getUseraccountId() {
 		return userAccountId;
 	}
