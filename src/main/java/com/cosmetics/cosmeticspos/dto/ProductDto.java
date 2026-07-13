@@ -20,7 +20,6 @@ public class ProductDto {
 		this.title = title;
 		this.code = code;
 		this.priceOne = priceOne;
-		
 		this.rating = rating;
 	}
 	public ProductDto(Product p) {
@@ -50,6 +49,7 @@ public class ProductDto {
         this.type = p.getType();
         this.count = p.getCount();
 //	    this.categorydto=new CategoryDto(pro.getCategoryId());
+        this.colorBox=p.getColorBox();
 		
 	}
 	private int productId;
@@ -78,13 +78,9 @@ public class ProductDto {
 	private int normalPriceOne;
 	private int normalPriceTwo;
 	private int rating;
-	public int getuserAccountId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public int getCategoryId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	private int colorBox;//non , lip
+	
+	
+
 	}
 

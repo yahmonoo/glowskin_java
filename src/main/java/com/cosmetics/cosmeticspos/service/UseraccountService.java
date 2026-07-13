@@ -19,6 +19,8 @@ public interface UseraccountService {
 
 		int deleteUseraccount(int useraccountId);
 
+		UseraccountDto getLogin(String userName, String password);
+
 		
 
 		

@@ -43,7 +43,7 @@ public class ProductDaoImpl implements ProductDao {
 		
 		
 		objList = session.createNativeQuery("SELECT p.priceOne,p.title ,p.`code`, p.photoOne,p.rating,p.productId,p.categoryId,\r\n"
-				+ "p.discountPriceOne,p.normalPriceOne,p.percent, c.`name` AS categoryName,p.detail\r\n"
+				+ "p.discountPriceOne,p.normalPriceOne,p.percent, c.`name` AS categoryName,p.detail,p.colorBox,p.type,p.colorOne,p.colorTwo,p.colorThree,p.colorFour\r\n"
 				+ "FROM product p\r\n"
 				+ "LEFT JOIN category c ON p.categoryId = c.categoryId\r\n"
 				+ sqlWhere
@@ -66,9 +66,14 @@ public class ProductDaoImpl implements ProductDao {
 			int percent = Integer.parseInt(obj[9].toString());
 			String categoryName = (String)obj[10];
 			String detail = (String)obj[11];
-
-			
-
+//			String colorBox = (String)obj[12];
+			int colorBox=Integer.parseInt(obj[12].toString());
+			int type=Integer.parseInt(obj[13].toString());
+			String colorOne = (String)obj[14];
+			String colorTwo = (String)obj[15];
+			String colorThree = (String)obj[16];
+			String colorFour = (String)obj[17];
+		
 			ProductDto dto = new ProductDto(photoOne,title,code,priceOne,rating);
 			
 			dto.setProductId(productId);
@@ -76,6 +81,13 @@ public class ProductDaoImpl implements ProductDao {
 			dto.setNormalPriceOne(normalPriceOne);
 			dto.setPercent(percent);
 			dto.setDetail(detail);
+			dto.setColorBox(colorBox);
+			
+		    dto.setColorOne(colorOne);
+		    dto.setColorTwo(colorTwo);
+		    dto.setColorThree(colorThree);
+		    dto.setColorFour(colorFour);
+			dto.setType(type);
 			
 			dto.setCategorydto(new CategoryDto(categoryId,categoryName));
 			dtoList.add(dto);

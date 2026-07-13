@@ -33,10 +33,19 @@ public class Product {
 					this.photoTwo=dto.getPhotoTwo();
 					this.photoThree=dto.getPhotoThree();
 					this.photoFour=dto.getPhotoFour();
-					this.colorOne=dto.getColorOne();
-					this.colorTwo=dto.getColorTwo();
-					this.colorThree=dto.getColorThree();
-					this.colorFour=dto.getColorFour();
+					
+					//if("lip".equals(dto.getColorBox())) 
+					if(dto.getColorBox()==1){
+						this.colorOne=dto.getColorOne();
+						this.colorTwo="07";
+						this.colorThree="08";
+						this.colorFour="09";
+					}else {
+						this.colorOne="none";
+						this.colorTwo="none";
+						this.colorThree="none";
+						this.colorFour="none";
+					}
 					this.priceOne=dto.getPriceOne();
 					this.priceTwo=dto.getPriceTwo();
 					this.sizeOne=dto.getSizeOne();
@@ -52,6 +61,7 @@ public class Product {
 					this.normalPriceTwo=dto.getNormalPriceTwo();
 					this.rating=dto.getRating();
 //					this.categoryId = dto.getCategoryId();
+					this.colorBox=dto.getColorBox();
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -81,6 +91,7 @@ public class Product {
 	private int normalPriceOne;
 	private int normalPriceTwo;
 	private int rating;
+	private int colorBox;
 	
 	}
 	
