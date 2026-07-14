@@ -137,7 +137,7 @@ public static String convertVoucherCode(Date date,int voucherId) {
 return strDate+voucherId;
 }
 public static String createVoucherCode(Date date,int voucherId) {//voucherId or productId or advertise 0
-	   SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyHHmmss");
+	   SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmss");
 		//SimpleDateFormat formatDate = new SimpleDateFormat("yyyy");
 	   String strDate = dateFormat.format(date);
 return strDate+voucherId;

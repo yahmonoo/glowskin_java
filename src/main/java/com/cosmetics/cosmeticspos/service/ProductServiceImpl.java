@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cosmetics.cosmeticspos.dao.ProductDao;
 import com.cosmetics.cosmeticspos.domain.City;
 import com.cosmetics.cosmeticspos.domain.Product;
+import com.cosmetics.cosmeticspos.dto.HomeDto;
 import com.cosmetics.cosmeticspos.dto.ProductDto;
 
 @Service
@@ -67,6 +69,19 @@ public class ProductServiceImpl implements ProductService {
 		Product p = productDao.getProductDetail(productId);
 		ProductDto dto 	= new ProductDto(p);//
 		return dto;//productDao.getProductDetail(productId);
+	}
+
+	@Transactional(readOnly=true)
+	@Override
+	public HomeDto getHome() {
+		// TODO Auto-generated method stub
+		return productDao.getHome();
+	}
+
+	@Override
+	public int updateProductPhoto(int productId, MultipartFile file) {
+		// TODO Auto-generated method stub
+		return productDao.updateProductPhoto(productId,file);
 	}
 
 

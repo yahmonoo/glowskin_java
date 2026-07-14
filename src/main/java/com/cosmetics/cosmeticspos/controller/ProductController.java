@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cosmetics.cosmeticspos.dto.HomeDto;
 import com.cosmetics.cosmeticspos.dto.ProductDto;
 import com.cosmetics.cosmeticspos.service.ProductService;
 
@@ -68,4 +70,25 @@ public class ProductController {
 				throw new RuntimeException("Add,Product Error!", e);
 			}
 	}
+		@GetMapping("product/adminhome")
+		public HomeDto getHome(){
+			try {
+			return productService.getHome();
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				throw new RuntimeException("Add,Product Error!", e);
+			}
+	}
+//		@PutMapping("product/photo/{productId}")
+//		public int updateProductPhoto(@PathVariable("productId")int productId,@RequestParam(value = "file",required=false) MultipartFile file) {
+//			try {
+//				return productService.updateProductPhoto(productId,file);
+//				}catch (Exception e) {
+//					// TODO: handle exception
+//					throw new RuntimeException("Update,Product Photo Error!", e);
+//				}
+//		}
+		
+		
 }

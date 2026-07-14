@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cosmetics.cosmeticspos.dto.UseraccountDto;
 import com.cosmetics.cosmeticspos.service.UseraccountService;
@@ -48,5 +49,14 @@ public class UseraccountController {
 			@RequestParam("password") String password){
 		return useraccountService.getLogin(userName,password);
 	}
-
+	 @PutMapping("userAccount/{userAccountId}/photo")
+		public int updateProductPhoto(@PathVariable("userAccountId")int userAccountId,
+				@RequestParam(value = "file",required=false) MultipartFile file) {
+			try {
+				return useraccountService.updateProductPhoto(userAccountId,file);
+				}catch (Exception e) {
+					// TODO: handle exception
+					throw new RuntimeException("Update,Product Photo Error!", e);
+				}
+		}
 }

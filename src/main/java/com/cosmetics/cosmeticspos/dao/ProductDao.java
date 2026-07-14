@@ -2,7 +2,10 @@ package com.cosmetics.cosmeticspos.dao;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cosmetics.cosmeticspos.domain.Product;
+import com.cosmetics.cosmeticspos.dto.HomeDto;
 import com.cosmetics.cosmeticspos.dto.ProductDto;
 
 public interface ProductDao {
@@ -20,5 +23,9 @@ public interface ProductDao {
 	Product getProductDetail(int productId);
 
 	void deleteProduct(Product p);
+
+	HomeDto getHome();
+
+	int updateProductPhoto(int productId, MultipartFile file);
 
 }

@@ -1,5 +1,7 @@
 package com.cosmetics.cosmeticspos.dao;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,10 +10,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cosmetics.cosmeticspos.domain.Product;
 import com.cosmetics.cosmeticspos.dto.CategoryDto;
+import com.cosmetics.cosmeticspos.dto.HomeDto;
 import com.cosmetics.cosmeticspos.dto.ProductDto;
+import com.infolite.dental.util.ConvertDate;
 
 
 @Repository
@@ -195,6 +200,67 @@ public class ProductDaoImpl implements ProductDao {
 		 session.createQuery("DELETE FROM Product WHERE productId= :productId")
 			.setParameter("productId",p.getProductId())
 			.executeUpdate();	
+	}
+
+	@Override
+	public HomeDto getHome() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		List<Object[]> objList = session.createNativeQuery("SELECT SUM(t.payment),COUNT(s.saleId)\r\n"
+				+ "FROM sale s\r\n"
+				+ "LEFT JOIN transaction t ON t.saleId = s.saleId\r\n"
+				+ "WHERE DATE(receivedDate) = CURRENT_DATE() ").getResultList();
+		HomeDto dto = new HomeDto();
+		if(objList.size()>0) {
+			Object[] obj = objList.get(0);
+			int payment = Integer.parseInt(obj[0].toString());
+			int orderCount = Integer.parseInt(obj[1].toString());
+			dto.setSaleAmount(payment);
+			dto.setOrderCount(orderCount);
+		}
+		objList = session.createNativeQuery("SELECT COUNT(ua.userAccountId),0 as indexone FROM useraccount ua ").getResultList();
+		if(objList.size()>0) {
+			Object[] obj = objList.get(0);
+			int userCount = Integer.parseInt(obj[0].toString());
+			dto.setMemberCount(userCount);
+		}
+		objList = session.createNativeQuery("SELECT COUNT(p.productId),0 as indexone FROM product p").getResultList();
+		if(objList.size()>0) {
+			Object[] obj = objList.get(0);
+			int itemCount = Integer.parseInt(obj[0].toString());
+			dto.setItemCount(itemCount);
+		}
+		return dto;
+	}
+
+	@Override
+	public int updateProductPhoto(int productId, MultipartFile file) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Product p= session.find(Product.class, productId);
+//		String pwd=new File("").getAbsolutePath();
+//		if(p.getPhoto()!=null) {
+//			File deleteFile=new File(pwd+"/productphoto/"+p.getPhoto()+".png");
+//			deleteFile.delete();
+//		}
+//		String photoCode= ConvertDate.createVoucherCode(new Date(), productId);
+//		p.setPhoto(photoCode);
+//		session.createNativeQuery(" UPDATE product p SET p.photo=:photoCode WHERE  p.productId=:productId ")
+//		.setParameter("photoCode", photoCode)
+//		.setParameter("productId", productId).executeUpdate();
+//		File dir=new File(pwd+"/productphoto/");
+//		String outPath=pwd+"/productphoto/"+photoCode+".png";
+//		File dest=new File(outPath);
+//		try {
+//			if (!dir.exists()) {
+//				dir.mkdir();
+//			}
+//			file.transferTo(dest);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		return productId;
 	}
 
 	

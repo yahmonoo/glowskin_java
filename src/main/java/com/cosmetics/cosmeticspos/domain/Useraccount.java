@@ -25,7 +25,7 @@ public class Useraccount {
 	private String address;
 	private String userName;
 	private String password;
-	
+	private String photo;
 	private Date date;
 	private String userType;
 
@@ -117,6 +117,22 @@ public class Useraccount {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public int getUserAccountId() {
+		return userAccountId;
+	}
+
+
+
+
 
 	
 

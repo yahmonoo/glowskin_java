@@ -1,6 +1,8 @@
 package com.cosmetics.cosmeticspos.dao;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,9 +11,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cosmetics.cosmeticspos.domain.Useraccount;
 import com.cosmetics.cosmeticspos.dto.UseraccountDto;
+import com.infolite.dental.util.ConvertDate;
 
 @Repository
 public class UseraccountDaoImpl  implements UseraccountDao {
@@ -25,7 +29,7 @@ public class UseraccountDaoImpl  implements UseraccountDao {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
 		
-		String sqlData="SELECT ua.userAccountId,ua.townshipId,t.townshipName,ua.profileName,ua.phone,ua.address,ua.userName,ua.password,ua.date,ua.userType FROM useraccount ua LEFT JOIN township t ON ua.townshipId=t.townshipId ";
+		String sqlData="SELECT ua.userAccountId,ua.townshipId,t.townshipName,ua.profileName,ua.phone,ua.address,ua.userName,ua.password,ua.date,ua.userType,ua.photo FROM useraccount ua LEFT JOIN township t ON ua.townshipId=t.townshipId ";
 		String orderClause=" ORDER BY ua.profileName ASC";
 		List<Object[]> objectList=new ArrayList<>();
 		if("ALL".equals(userType)) {
@@ -48,8 +52,8 @@ public class UseraccountDaoImpl  implements UseraccountDao {
 		    String password=object[7].toString();
 		    Date date=(Date) object[8];
 		    String usertype=object[9].toString();
-		    
-		    UseraccountDto dto=new UseraccountDto(userAccountId,townshipId,townshipName,profileName,phone,address,userName,password,date,usertype);
+		    String photo= (String)object[10];
+		    UseraccountDto dto=new UseraccountDto(userAccountId,townshipId,townshipName,profileName,phone,address,userName,password,date,usertype,photo);
 		    userDtoList.add(dto);
 
 		}
@@ -96,6 +100,33 @@ public class UseraccountDaoImpl  implements UseraccountDao {
 			ua = userList.get(0);
 		}
 		return ua;
+	}
+
+	@Override
+	public int updateProductPhoto(int userAccountId, MultipartFile file) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Useraccount ua= session.find(Useraccount.class, userAccountId);
+		String pwd=new File("").getAbsolutePath();
+		if(ua.getPhoto()!=null) {
+			File deleteFile=new File(pwd+"/userphoto/"+ua.getPhoto());//+".png"
+			deleteFile.delete();
+		}
+		String photoCode= ConvertDate.createVoucherCode(new Date(), userAccountId);
+		ua.setPhoto(photoCode+".png");
+		File dir=new File(pwd+"/userphoto/");
+		String outPath=pwd+"/userphoto/"+photoCode+".png";
+		File dest=new File(outPath);
+		try {
+			if (!dir.exists()) {
+				dir.mkdir();
+			}
+			file.transferTo(dest);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userAccountId;
 	}
 
 

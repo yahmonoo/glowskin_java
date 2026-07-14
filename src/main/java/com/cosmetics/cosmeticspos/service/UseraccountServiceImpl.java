@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cosmetics.cosmeticspos.dao.UseraccountDao;
 import com.cosmetics.cosmeticspos.domain.Useraccount;
@@ -59,6 +60,12 @@ public class UseraccountServiceImpl  implements UseraccountService{
 		Useraccount ua = useraccountDao.getLogin(userName,password);
 		
 		return new UseraccountDto(ua);
+	}
+	@Transactional(readOnly=false)
+	@Override
+	public int updateProductPhoto(int userAccountId, MultipartFile file) {
+		// TODO Auto-generated method stub
+		return useraccountDao.updateProductPhoto(userAccountId,file);
 	}
 
 	

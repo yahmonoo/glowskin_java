@@ -57,5 +57,6 @@ public UseraccountDto(Useraccount ua) {
 	@JsonDeserialize(using = DateTimeFormatDeserializer.class)
 	private Date date;
 	private String userType;
+	private String photo;
 
 }
