@@ -23,12 +23,29 @@ public class Transaction {
 	private String paymentType;
 	private Date date;
 	private Date modifiedDate;
+	private int amount;
+	private int deliFee;
+	public Transaction() {
+		super();
+	}
 	public Transaction(TransactionDto dto) {
 		// TODO Auto-generated constructor stub
 		this.transactionId = dto.getTransactionId();
 		this.saleId = dto.getSaleId();
 		this.payment=dto.getPayment();
 		this.balance=dto.getBalance();
+		this.paymentType=dto.getPaymentType();
+		this.date=(dto.getDate() !=null)? dto.getDate() : newDate();
+		this.modifiedDate=new Date();
+	}
+	public Transaction(int saleId, TransactionDto dto) {
+		// TODO Auto-generated constructor stub
+		this.transactionId = dto.getTransactionId();
+		this.saleId = saleId;
+		this.amount = dto.getAmount();
+		this.deliFee = dto.getDeliFee();
+		this.payment=dto.getPayment();
+		this.balance=this.payment;
 		this.paymentType=dto.getPaymentType();
 		this.date=(dto.getDate() !=null)? dto.getDate() : newDate();
 		this.modifiedDate=new Date();
@@ -78,6 +95,18 @@ public class Transaction {
 	}
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public int getDeliFee() {
+		return deliFee;
+	}
+	public void setDeliFee(int deliFee) {
+		this.deliFee = deliFee;
 	}
 	
 

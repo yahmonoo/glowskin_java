@@ -25,6 +25,8 @@ public interface UseraccountService {
 
 		int updateProductPhoto(int userAccountId, MultipartFile file);
 
+		UseraccountDto getUseraccountById(int userAccountId);
+
 		
 
 		

@@ -48,5 +48,7 @@ private int balance;
 private String paymentType;
 private Date date;
 private Date modifiedDate;
+private int amount;
+private int deliFee;
 }
 

@@ -67,6 +67,12 @@ public class UseraccountServiceImpl  implements UseraccountService{
 		// TODO Auto-generated method stub
 		return useraccountDao.updateProductPhoto(userAccountId,file);
 	}
+	@Transactional(readOnly=true)
+	@Override
+	public UseraccountDto getUseraccountById(int userAccountId) {
+		// TODO Auto-generated method stub
+		return useraccountDao.getUseraccountById(userAccountId);
+	}
 
 	
 

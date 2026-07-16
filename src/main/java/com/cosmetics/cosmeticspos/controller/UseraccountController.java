@@ -34,8 +34,8 @@ public class UseraccountController {
 		
 		return useraccountService.addUseraccount(dto);
 	}
-	@PutMapping("useraccount")
-	public UseraccountDto updateUseraccount(@RequestBody UseraccountDto dto){
+	@PutMapping("useraccount/{useraccountId}")
+	public UseraccountDto updateUseraccount(@PathVariable("useraccountId") int useraccountId,@RequestBody UseraccountDto dto){
 		
 		return useraccountService.updateUseraccount(dto);
 	}
@@ -58,5 +58,9 @@ public class UseraccountController {
 					// TODO: handle exception
 					throw new RuntimeException("Update,Product Photo Error!", e);
 				}
+		}
+	 @GetMapping("useraccount/{userAccountId}")
+		public UseraccountDto getUseraccountById(@PathVariable("userAccountId")int userAccountId){
+			return useraccountService.getUseraccountById(userAccountId);
 		}
 }

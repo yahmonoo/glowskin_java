@@ -17,10 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cosmetics.cosmeticspos.dto.HomeDto;
 import com.cosmetics.cosmeticspos.dto.ProductDto;
 import com.cosmetics.cosmeticspos.service.ProductService;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 @RequestMapping("/api/v1/")
-
+@CrossOrigin(origins = "*")
 public class ProductController {
 
 	@Autowired

@@ -2,6 +2,7 @@ package com.cosmetics.cosmeticspos.dto;
 
 
 import java.util.Date;
+import java.util.List;
 
 import com.cosmetics.cosmeticspos.domain.Sale;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -24,9 +25,20 @@ public class SaleDto {
 				this.date = s.getDate();
 			}
 
+	public SaleDto(int saleId2, int customerId2, Date receivedDate2, Date date2) {
+		// TODO Auto-generated constructor stub
+		this.saleId = saleId2;
+		this.customerId = customerId2;
+		this.receivedDate = receivedDate2;
+		this.date = date2;
+	}
+
 	private int saleId;
 	private int customerId;
 	private Date receivedDate;
 	private Date date;
+	private String voucherCode;
+	private List<ItemtransactionDto> itemList;
+	private TransactionDto transaction;
 
 }

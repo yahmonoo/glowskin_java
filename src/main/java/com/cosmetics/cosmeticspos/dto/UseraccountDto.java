@@ -58,5 +58,6 @@ public UseraccountDto(Useraccount ua) {
 	private Date date;
 	private String userType;
 	private String photo;
+	private CityDto cityDto;
 
 }

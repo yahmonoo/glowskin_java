@@ -20,5 +20,7 @@ public interface UseraccountDao {
 
 		int updateProductPhoto(int userAccountId, MultipartFile file);
 
+		UseraccountDto getUseraccountById(int userAccountId);
+
 
 }

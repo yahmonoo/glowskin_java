@@ -14,6 +14,7 @@ import com.cosmetics.cosmeticspos.dto.CityDto;
 import com.cosmetics.cosmeticspos.dto.SaleDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.infolite.dental.util.ConvertDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Sale {
 		this.customerId = dto.getCustomerId();
 		this.receivedDate = dto.getReceivedDate();
 	    this.date = dto.getDate();	
+	    this.voucherCode = ConvertDate.convertyymmddhhmmss(new Date());
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -39,6 +41,6 @@ public class Sale {
 	private int customerId;
 	private Date receivedDate;
 	private Date date;
-	
+	private String voucherCode;
 	
 }

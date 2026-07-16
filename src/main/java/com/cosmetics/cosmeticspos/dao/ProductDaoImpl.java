@@ -140,7 +140,7 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		
 		objList = session.createNativeQuery("SELECT p.priceOne,p.title ,p.`code`, p.photoOne,p.rating,p.productId,p.categoryId,\r\n"
-				+ "p.discountPriceOne,p.normalPriceOne,p.percent, c.`name` AS categoryName\r\n"
+				+ "p.discountPriceOne,p.normalPriceOne,p.percent, c.`name` AS categoryName,p.sizeOne\r\n"
 				+ "FROM product p\r\n"
 				+ "LEFT JOIN category c ON p.categoryId = c.categoryId\r\n"
 				+ sqlWhere
@@ -162,13 +162,14 @@ public class ProductDaoImpl implements ProductDao {
 			int normalPriceOne = Integer.parseInt(obj[8].toString());
 			int percent = Integer.parseInt(obj[9].toString());
 			String categoryName = (String)obj[10];
-
+			int sizeOne = Integer.parseInt(obj[11].toString());
 			ProductDto dto = new ProductDto(photoOne,title,code,priceOne,rating);
 			
 			dto.setProductId(productId);
 			dto.setDiscountPriceOne(discountPriceOne);
 			dto.setNormalPriceOne(normalPriceOne);
 			dto.setPercent(percent);
+			dto.setSizeOne(sizeOne);
 			
 			dto.setCategorydto(new CategoryDto(categoryId,categoryName));
 			dtoList.add(dto);
@@ -211,25 +212,57 @@ public class ProductDaoImpl implements ProductDao {
 				+ "LEFT JOIN transaction t ON t.saleId = s.saleId\r\n"
 				+ "WHERE DATE(receivedDate) = CURRENT_DATE() ").getResultList();
 		HomeDto dto = new HomeDto();
-		if(objList.size()>0) {
+//		if(objList.size()>0) {
+//			Object[] obj = objList.get(0);
+//			int payment = Integer.parseInt(obj[0].toString());
+//			int orderCount = Integer.parseInt(obj[1].toString());
+//			dto.setSaleAmount(payment);
+//			dto.setOrderCount(orderCount);
+//		}
+//		objList = session.createNativeQuery("SELECT COUNT(ua.userAccountId),0 as indexone FROM useraccount ua ").getResultList();
+//		if(objList.size()>0) {
+//			Object[] obj = objList.get(0);
+//			int userCount = Integer.parseInt(obj[0].toString());
+//			dto.setMemberCount(userCount);
+//		}
+//		objList = session.createNativeQuery("SELECT COUNT(p.productId),0 as indexone FROM product p").getResultList();
+//		if(objList.size()>0) {
+//			Object[] obj = objList.get(0);
+//			int itemCount = Integer.parseInt(obj[0].toString());
+//			dto.setItemCount(itemCount);
+//		}
+//		return dto;
+//	}
+		if(objList.size() > 0 && objList.get(0) != null) {
 			Object[] obj = objList.get(0);
-			int payment = Integer.parseInt(obj[0].toString());
-			int orderCount = Integer.parseInt(obj[1].toString());
+			
+			String paymentStr = (obj[0] != null) ? obj[0].toString() : "0";
+			String orderCountStr = (obj[1] != null) ? obj[1].toString() : "0";
+			
+			int payment = Integer.parseInt(paymentStr);
+			int orderCount = Integer.parseInt(orderCountStr);
+			
 			dto.setSaleAmount(payment);
 			dto.setOrderCount(orderCount);
 		}
+		
+		
 		objList = session.createNativeQuery("SELECT COUNT(ua.userAccountId),0 as indexone FROM useraccount ua ").getResultList();
-		if(objList.size()>0) {
+		if(objList.size() > 0 && objList.get(0) != null) {
 			Object[] obj = objList.get(0);
-			int userCount = Integer.parseInt(obj[0].toString());
+			String userCountStr = (obj[0] != null) ? obj[0].toString() : "0";
+			int userCount = Integer.parseInt(userCountStr);
 			dto.setMemberCount(userCount);
 		}
+		
 		objList = session.createNativeQuery("SELECT COUNT(p.productId),0 as indexone FROM product p").getResultList();
-		if(objList.size()>0) {
+		if(objList.size() > 0 && objList.get(0) != null) {
 			Object[] obj = objList.get(0);
-			int itemCount = Integer.parseInt(obj[0].toString());
+			String itemCountStr = (obj[0] != null) ? obj[0].toString() : "0";
+			int itemCount = Integer.parseInt(itemCountStr);
 			dto.setItemCount(itemCount);
 		}
+		
 		return dto;
 	}
 

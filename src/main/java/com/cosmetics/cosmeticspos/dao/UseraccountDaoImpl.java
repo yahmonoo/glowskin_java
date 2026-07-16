@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cosmetics.cosmeticspos.domain.Useraccount;
+import com.cosmetics.cosmeticspos.dto.CityDto;
 import com.cosmetics.cosmeticspos.dto.UseraccountDto;
 import com.infolite.dental.util.ConvertDate;
 
@@ -53,7 +54,7 @@ public class UseraccountDaoImpl  implements UseraccountDao {
 		    Date date=(Date) object[8];
 		    String usertype=object[9].toString();
 		    String photo= (String)object[10];
-		    UseraccountDto dto=new UseraccountDto(userAccountId,townshipId,townshipName,profileName,phone,address,userName,password,date,usertype,photo);
+		    UseraccountDto dto=new UseraccountDto(userAccountId,townshipId,townshipName,profileName,phone,address,userName,password,date,usertype,photo,new CityDto());
 		    userDtoList.add(dto);
 
 		}
@@ -127,6 +128,38 @@ public class UseraccountDaoImpl  implements UseraccountDao {
 			e.printStackTrace();
 		}
 		return userAccountId;
+	}
+
+	@Override
+	public UseraccountDto getUseraccountById(int userAccountId) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		List<Object[]> objList = session.createNativeQuery("SELECT ua.userAccountId,ua.phone,\r\n"
+				+ "ua.address,c.cityId,c.cityName,ts.townshipId,ts.townshipName\r\n"
+				+ "FROM useraccount ua\r\n"
+				+ "LEFT JOIN township ts ON ts.townshipId = ua.townshipId\r\n"
+				+ "LEFT JOIN city c ON c.cityId  = ts.cityId\r\n"
+				+ " Where ua.userAccountId=:userAccountId")
+				.setParameter("userAccountId", userAccountId).getResultList();
+		UseraccountDto dto = new UseraccountDto();
+		if(objList.size()>0) {
+			Object[] obj = objList.get(0);
+			int userId = Integer.parseInt(obj[0].toString());
+			String phone = (String)obj[1];
+			String address = (String)obj[2];
+			int cityId = Integer.parseInt(obj[3].toString());
+			String cityName = (String)obj[4];
+			int tsId = Integer.parseInt(obj[5].toString());
+			String tsName = (String)obj[6];
+			dto.setUserAccountId(userAccountId);
+			dto.setPhone(phone);
+			dto.setAddress(address);
+			dto.setTownshipId(tsId);
+			dto.setTownshipName(tsName);
+			dto.setCityDto(new CityDto(cityId,cityName));
+			
+		}
+		return dto;
 	}
 
 

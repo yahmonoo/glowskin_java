@@ -36,7 +36,7 @@ public class ItemtransactionController {
 	}
 	@PutMapping("itemtransaction/{itemtransactionId}")
 	public ItemtransactionDto updateItemtransaction(@PathVariable("itemtransactionId")int itemtransactionId,@RequestBody ItemtransactionDto dto){
-		dto.setItemTransactionId(itemtransactionId);
+		
 		itemtransactionService.updateItemtransaction(dto);
 		return dto;
 	}
