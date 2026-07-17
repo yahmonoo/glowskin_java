@@ -29,7 +29,7 @@ public class SaleController {
 		return saleService.getSale();
 	}
 	@PostMapping("sale")
-	public int addSale(@RequestBody SaleDto dto){
+	public SaleDto addSale(@RequestBody SaleDto dto){
 		
 		return saleService.addSale(dto);
 	}

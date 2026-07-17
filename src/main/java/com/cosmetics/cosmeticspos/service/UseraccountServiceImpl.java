@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cosmetics.cosmeticspos.dao.UseraccountDao;
+import com.cosmetics.cosmeticspos.domain.Category;
 import com.cosmetics.cosmeticspos.domain.Useraccount;
 import com.cosmetics.cosmeticspos.dto.UseraccountDto;
 
@@ -37,11 +38,11 @@ public class UseraccountServiceImpl  implements UseraccountService{
 	@Override
 	@Transactional(readOnly=false)
 	
-	public UseraccountDto updateUseraccount(UseraccountDto dto) {
+	public int updateUseraccount(UseraccountDto dto) {
 		// TODO Auto-generated method stub
 		Useraccount  ua= new Useraccount(dto);
 		useraccountDao.updateUseraccount(ua);
-		return dto;
+		return ua.getUseraccountId();
 		
 	}
 
@@ -60,7 +61,7 @@ public class UseraccountServiceImpl  implements UseraccountService{
 		Useraccount ua = useraccountDao.getLogin(userName,password);
 		
 		return new UseraccountDto(ua);
-	}
+	}	
 	@Transactional(readOnly=false)
 	@Override
 	public int updateProductPhoto(int userAccountId, MultipartFile file) {

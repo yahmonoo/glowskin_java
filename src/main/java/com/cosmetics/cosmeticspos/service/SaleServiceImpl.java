@@ -31,7 +31,7 @@ public class SaleServiceImpl implements SaleService {
 	}
 
 	@Transactional(readOnly=false)
-	public int addSale(SaleDto dto) {
+	public SaleDto addSale(SaleDto dto) {
 		Sale s= new Sale(dto);
 		saleDao.addSale(s);
 		
@@ -44,7 +44,10 @@ public class SaleServiceImpl implements SaleService {
 		
 		Transaction t = new Transaction(s.getSaleId(),dto.getTransaction()); 
 		tranDao.addTransaction(t);
-		return s.getSaleId();
+		
+		dto.setVoucherCode(s.getVoucherCode());
+		dto.setSaleId(s.getSaleId());
+		return dto;
 	}
 
 	@Transactional(readOnly=false)

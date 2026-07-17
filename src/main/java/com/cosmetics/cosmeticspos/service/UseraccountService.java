@@ -10,7 +10,7 @@ public interface UseraccountService {
 
 		UseraccountDto addUseraccount(UseraccountDto dto);
 
-		UseraccountDto updateUseraccount(UseraccountDto dto);
+		int updateUseraccount(UseraccountDto dto);
 
 
 

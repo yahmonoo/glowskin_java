@@ -35,7 +35,7 @@ public class UseraccountController {
 		return useraccountService.addUseraccount(dto);
 	}
 	@PutMapping("useraccount/{useraccountId}")
-	public UseraccountDto updateUseraccount(@PathVariable("useraccountId") int useraccountId,@RequestBody UseraccountDto dto){
+	public int updateUseraccount(@PathVariable("useraccountId") int useraccountId,@RequestBody UseraccountDto dto){
 		
 		return useraccountService.updateUseraccount(dto);
 	}

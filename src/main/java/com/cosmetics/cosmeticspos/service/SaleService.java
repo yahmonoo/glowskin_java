@@ -8,7 +8,7 @@ public interface SaleService {
 
 	List<SaleDto> getSale();
 
-	int addSale(SaleDto dto);
+	SaleDto addSale(SaleDto dto);
 	
 	List<SaleDto> getSale(String search);
 

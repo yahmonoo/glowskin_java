@@ -28,8 +28,6 @@ public class Useraccount {
 	private String photo;
 	private Date date;
 	private String userType;
-	private int amount;
-	private int deliFee;
 
 	public Useraccount(UseraccountDto dto) {
 		// TODO Auto-generated constructor stub
