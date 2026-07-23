@@ -43,11 +43,11 @@ public class Transaction {
 		this.transactionId = dto.getTransactionId();
 		this.saleId = saleId;
 		this.amount = dto.getAmount();
-		this.deliFee = dto.getDeliFee();
-		this.payment=dto.getPayment();
+		this.deliFee = dto.getDeliFee();//
+		this.payment=this.amount+this.deliFee;//
 		this.balance=this.payment;
-		this.paymentType=dto.getPaymentType();
-		this.date=(dto.getDate() !=null)? dto.getDate() : newDate();
+		this.paymentType=dto.getPaymentType();//
+		this.date=(dto.getDate() !=null)? dto.getDate() : new Date();
 		this.modifiedDate=new Date();
 	}
 	private Date newDate() {

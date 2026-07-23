@@ -1,8 +1,10 @@
 package com.cosmetics.cosmeticspos.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.cosmetics.cosmeticspos.dto.SaleDto;
+import com.cosmetics.cosmeticspos.dto.YearDto;
 
 public interface SaleService {
 
@@ -15,6 +17,10 @@ public interface SaleService {
 	int updateSale(SaleDto dto);
 
 	int deleteSale(int saleId);
+
+	List<SaleDto> getSaleList(Date fromDate, Date toDate, int customerId);
+
+	YearDto getSaleYearReport();
 	
 
 }

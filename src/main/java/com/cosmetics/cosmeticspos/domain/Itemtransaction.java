@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.cosmetics.cosmeticspos.dto.ItemtransactionDto;
+import com.cosmetics.cosmeticspos.dto.ProductDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -27,7 +28,7 @@ public class Itemtransaction {
 			this.itemTransactionId = dto.getItemTransactionId();
 			this.productId = dto.getProductId();
 			this.saleId=dto.getSaleId();
-			this.qty=dto.getQty();
+			this.qty=dto.getBalance();
 			this.unitPrice=dto.getUnitPrice();
 			this.amount=dto.getAmount();
 			this.discount=dto.getDiscount();
@@ -46,6 +47,18 @@ public class Itemtransaction {
 	public int getItemTransactionId() {
 		// TODO Auto-generated method stub
 		return itemTransactionId;
+	}
+	public Itemtransaction(ProductDto dto) {
+		// TODO Auto-generated constructor stub
+		//this.itemTransactionId = dto.getItemTransactionId();
+		this.productId = dto.getProductId();
+		//this.saleId=dto.getSaleId();
+		this.qty=dto.getBuyQuantity();
+		this.unitPrice=dto.getPriceOne();
+		this.amount=this.qty * this.unitPrice;
+		this.discount= (dto.getNormalPriceOne()- dto.getPriceOne())*this.qty;
+		this.balance=this.amount;
+		
 	}
 	
 }

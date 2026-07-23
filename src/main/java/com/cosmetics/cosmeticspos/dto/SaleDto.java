@@ -33,12 +33,26 @@ public class SaleDto {
 		this.date = date2;
 	}
 
+	public SaleDto(int userId, String userName, Date receivedDate, String vc, int itemCount, int amount, int deliFee,
+			String payType, int payment, Date date) {
+		// TODO Auto-generated constructor stub
+		this.userAccount = new UseraccountDto(userId,userName);
+		this.receivedDate = receivedDate;
+		this.voucherCode = vc;
+		this.itemCount = itemCount;
+		this.transaction = new TransactionDto(amount,deliFee,payType,payment);
+		this.date = date;
+	}
+
 	private int saleId;
 	private int customerId;
+	private UseraccountDto userAccount;
 	private Date receivedDate;
 	private Date date;
 	private String voucherCode;
 	private List<ItemtransactionDto> itemList;
 	private TransactionDto transaction;
+	private List<ProductDto> productList;
+	private int itemCount;
 
 }

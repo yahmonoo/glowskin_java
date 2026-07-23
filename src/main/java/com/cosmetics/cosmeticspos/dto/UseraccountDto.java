@@ -29,7 +29,13 @@ public UseraccountDto(Useraccount ua) {
 	this.address = ua.getAddress();
 	this.phone = ua.getPhone();
 	this.userType = ua.getUserType();
+	this.photo = ua.getPhoto();
 	}
+	public UseraccountDto(int userId, String userName2) {
+	// TODO Auto-generated constructor stub
+		this.userAccountId = userId;
+		this.profileName = userName2;
+}
 	//	public UseraccountDto(int userAccountId, int townshipId, String townshipName, String profileName, String phone,
 //			String address, String userName, String password, Date date, String userType) {
 //		

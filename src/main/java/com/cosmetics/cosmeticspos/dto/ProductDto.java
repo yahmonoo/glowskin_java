@@ -79,7 +79,7 @@ public class ProductDto {
 	private int normalPriceTwo;
 	private int rating;
 	private int colorBox;//non , lip
-	
+	private int buyQuantity;
 	
 
 	}

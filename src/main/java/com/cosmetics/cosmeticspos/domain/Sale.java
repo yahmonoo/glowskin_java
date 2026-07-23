@@ -31,8 +31,12 @@ public class Sale {
 
 		this.saleId = dto.getSaleId();
 		this.customerId = dto.getCustomerId();
-		this.receivedDate = dto.getReceivedDate();
-	    this.date = dto.getDate();	
+		this.receivedDate  = new Date();
+		if(dto.getReceivedDate()!=null) {
+			this.receivedDate = dto.getReceivedDate();
+		}
+		
+	    this.date = new Date();	
 	    this.voucherCode = ConvertDate.convertyymmddhhmmss(new Date());
 	}
 	@Id

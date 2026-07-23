@@ -31,5 +31,6 @@ public class ItemtransactionDto {
 	private int amount;
 	private int discount;
 	private int balance;
+	
 }
 

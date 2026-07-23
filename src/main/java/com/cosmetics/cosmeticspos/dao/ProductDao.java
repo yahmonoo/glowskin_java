@@ -26,6 +26,6 @@ public interface ProductDao {
 
 	HomeDto getHome();
 
-	int updateProductPhoto(int productId, MultipartFile file);
+	int updateProductPhoto(int productId, MultipartFile[] files);
 
 }

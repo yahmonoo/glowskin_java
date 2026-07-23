@@ -40,66 +40,71 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public List<ProductDto> getProduct() {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		List<Object[]> objList = new ArrayList<>();
-		String sqlWhere = " Where 1=1 ";
-		String sqlOrderBy = "";
-		
-		
-		objList = session.createNativeQuery("SELECT p.priceOne,p.title ,p.`code`, p.photoOne,p.rating,p.productId,p.categoryId,\r\n"
-				+ "p.discountPriceOne,p.normalPriceOne,p.percent, c.`name` AS categoryName,p.detail,p.colorBox,p.type,p.colorOne,p.colorTwo,p.colorThree,p.colorFour\r\n"
-				+ "FROM product p\r\n"
-				+ "LEFT JOIN category c ON p.categoryId = c.categoryId\r\n"
-				+ sqlWhere
-				+ sqlOrderBy)
-				.getResultList();
-		List<ProductDto> dtoList = new ArrayList<>();
+	    Session session = sessionFactory.getCurrentSession();
+	    List<Object[]> objList = new ArrayList<>();
+	    String sqlWhere = " Where 1=1 ";
+	    String sqlOrderBy = "";
+	    
+	 
+	    objList = session.createNativeQuery("SELECT p.priceOne, p.title, p.`code`, p.photoOne, p.rating, p.productId, p.categoryId,\r\n"
+	            + "p.discountPriceOne, p.normalPriceOne, p.percent, c.`name` AS categoryName, p.detail, p.colorBox, p.type, p.colorOne, p.colorTwo, p.colorThree, p.colorFour,\r\n"
+	            + "p.photoTwo, p.photoThree, p.photoFour\r\n"
+	            + "FROM product p\r\n"
+	            + "LEFT JOIN category c ON p.categoryId = c.categoryId\r\n"
+	            + sqlWhere
+	            + sqlOrderBy)
+	            .getResultList();
+	            
+	    List<ProductDto> dtoList = new ArrayList<>();
 
-		for(Object[] obj:objList) {
-			int priceOne = Integer.parseInt(obj[0].toString());
-			
-			String title = (String)obj[1];
-			String code = (String)obj[2];
-			String photoOne = (String)obj[3];
-			//int rating = Integer.parseInt(obj[4].toString());
-			int rating = (int) Double.parseDouble(obj[4].toString());
-			int productId = Integer.parseInt(obj[5].toString());
-			int categoryId = Integer.parseInt(obj[6].toString());
-			int discountPriceOne = Integer.parseInt(obj[7].toString());
-			int normalPriceOne = Integer.parseInt(obj[8].toString());
-			int percent = Integer.parseInt(obj[9].toString());
-			String categoryName = (String)obj[10];
-			String detail = (String)obj[11];
-//			String colorBox = (String)obj[12];
-			int colorBox=Integer.parseInt(obj[12].toString());
-			int type=Integer.parseInt(obj[13].toString());
-			String colorOne = (String)obj[14];
-			String colorTwo = (String)obj[15];
-			String colorThree = (String)obj[16];
-			String colorFour = (String)obj[17];
-		
-			ProductDto dto = new ProductDto(photoOne,title,code,priceOne,rating);
-			
-			dto.setProductId(productId);
-			dto.setDiscountPriceOne(discountPriceOne);
-			dto.setNormalPriceOne(normalPriceOne);
-			dto.setPercent(percent);
-			dto.setDetail(detail);
-			dto.setColorBox(colorBox);
-			
-		    dto.setColorOne(colorOne);
-		    dto.setColorTwo(colorTwo);
-		    dto.setColorThree(colorThree);
-		    dto.setColorFour(colorFour);
-			dto.setType(type);
-			
-			dto.setCategorydto(new CategoryDto(categoryId,categoryName));
-			dtoList.add(dto);
-		}
-		
-		
-		return dtoList;
+	    for(Object[] obj : objList) {
+	        int priceOne = Integer.parseInt(obj[0].toString());
+	        String title = (String)obj[1];
+	        String code = (String)obj[2];
+	        String photoOne = (String)obj[3];
+	        int rating = (int) Double.parseDouble(obj[4].toString());
+	        int productId = Integer.parseInt(obj[5].toString());
+	        int categoryId = Integer.parseInt(obj[6].toString());
+	        int discountPriceOne = Integer.parseInt(obj[7].toString());
+	        int normalPriceOne = Integer.parseInt(obj[8].toString());
+	        int percent = Integer.parseInt(obj[9].toString());
+	        String categoryName = (String)obj[10];
+	        String detail = (String)obj[11];
+	        int colorBox = Integer.parseInt(obj[12].toString());
+	        int type = Integer.parseInt(obj[13].toString());
+	        String colorOne = (String)obj[14];
+	        String colorTwo = (String)obj[15];
+	        String colorThree = (String)obj[16];
+	        String colorFour = (String)obj[17];
+	        
+	       
+	        String photoTwo = (String)obj[18];
+	        String photoThree = (String)obj[19];
+	        String photoFour = (String)obj[20];
+	    
+	        ProductDto dto = new ProductDto(photoOne, title, code, priceOne, rating);
+	        
+	        dto.setProductId(productId);
+	        dto.setDiscountPriceOne(discountPriceOne);
+	        dto.setNormalPriceOne(normalPriceOne);
+	        dto.setPercent(percent);
+	        dto.setDetail(detail);
+	        dto.setColorBox(colorBox);
+	        dto.setPhotoTwo(photoTwo);
+	        dto.setPhotoThree(photoThree);
+	        dto.setPhotoFour(photoFour);
+
+	        dto.setColorOne(colorOne);
+	        dto.setColorTwo(colorTwo);
+	        dto.setColorThree(colorThree);
+	        dto.setColorFour(colorFour);
+	        dto.setType(type);
+	        
+	        dto.setCategorydto(new CategoryDto(categoryId, categoryName));
+	        dtoList.add(dto);
+	    }
+	    
+	    return dtoList;
 	}
 
 	@Override
@@ -266,35 +271,45 @@ public class ProductDaoImpl implements ProductDao {
 		return dto;
 	}
 
-	@Override
-	public int updateProductPhoto(int productId, MultipartFile file) {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		Product p= session.find(Product.class, productId);
-//		String pwd=new File("").getAbsolutePath();
-//		if(p.getPhoto()!=null) {
-//			File deleteFile=new File(pwd+"/productphoto/"+p.getPhoto()+".png");
-//			deleteFile.delete();
-//		}
-//		String photoCode= ConvertDate.createVoucherCode(new Date(), productId);
-//		p.setPhoto(photoCode);
-//		session.createNativeQuery(" UPDATE product p SET p.photo=:photoCode WHERE  p.productId=:productId ")
-//		.setParameter("photoCode", photoCode)
-//		.setParameter("productId", productId).executeUpdate();
-//		File dir=new File(pwd+"/productphoto/");
-//		String outPath=pwd+"/productphoto/"+photoCode+".png";
-//		File dest=new File(outPath);
-//		try {
-//			if (!dir.exists()) {
-//				dir.mkdir();
-//			}
-//			file.transferTo(dest);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		return productId;
-	}
-
 	
+
+	@Override
+	public int updateProductPhoto(int productId, MultipartFile[] files) {
+	    Session session = sessionFactory.getCurrentSession();
+	    Product p = session.find(Product.class, productId);
+
+	    if (p == null || files == null || files.length == 0) {
+	        return productId;
+	    }
+
+	    String pwd = new File("").getAbsolutePath();
+	    File dir = new File(pwd + "/productphoto/");
+	    if (!dir.exists()) {
+	        dir.mkdirs();
+	    }
+
+	    	for (int i = 0; i < files.length && i < 4; i++) {
+	        MultipartFile file = files[i];
+	        if (file != null && !file.isEmpty()) {
+	            
+	            String fileName = System.currentTimeMillis() + "_" + java.util.UUID.randomUUID().toString().substring(0, 5) + "_" + (i + 1) + ".jpg";
+	            File dest = new File(pwd + "/productphoto/" + fileName);
+	            
+	            try {
+	                file.transferTo(dest);
+	                
+	                if (i == 0) p.setPhotoOne(fileName);
+	                if (i == 1) p.setPhotoTwo(fileName);
+	                if (i == 2) p.setPhotoThree(fileName);
+	                if (i == 3) p.setPhotoFour(fileName);
+
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    session.update(p);
+	    return productId;
+	}
 }

@@ -41,6 +41,14 @@ Date date, Date modifiedDate) {
 	this.modifiedDate=modifiedDate;
 }
 
+public TransactionDto(int amount2, int deliFee2, String payType, int payment2) {
+	// TODO Auto-generated constructor stub
+	this.amount = amount2;
+	this.deliFee = deliFee2;
+	this.paymentType = payType;
+	this.payment = payment2;
+}
+
 private int transactionId;
 private int saleId;
 private int payment;

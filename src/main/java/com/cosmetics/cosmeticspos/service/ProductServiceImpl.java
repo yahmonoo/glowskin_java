@@ -77,12 +77,12 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return productDao.getHome();
 	}
-
+	
+	@Transactional(readOnly = false)
 	@Override
-	public int updateProductPhoto(int productId, MultipartFile file) {
-		// TODO Auto-generated method stub
-		return productDao.updateProductPhoto(productId,file);
+	public int updateProductPhoto(int productId, MultipartFile[] files) {
+	    return productDao.updateProductPhoto(productId, files);
 	}
 
-
+	
 }

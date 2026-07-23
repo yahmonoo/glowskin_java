@@ -135,7 +135,7 @@ public class UseraccountDaoImpl  implements UseraccountDao {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
 		List<Object[]> objList = session.createNativeQuery("SELECT ua.userAccountId,ua.phone,\r\n"
-				+ "ua.address,c.cityId,c.cityName,ts.townshipId,ts.townshipName\r\n"
+				+ "ua.address,c.cityId,c.cityName,ts.townshipId,ts.townshipName,ua.photo\r\n"
 				+ "FROM useraccount ua\r\n"
 				+ "LEFT JOIN township ts ON ts.townshipId = ua.townshipId\r\n"
 				+ "LEFT JOIN city c ON c.cityId  = ts.cityId\r\n"
@@ -151,13 +151,14 @@ public class UseraccountDaoImpl  implements UseraccountDao {
 			String cityName = (String)obj[4];
 			int tsId = Integer.parseInt(obj[5].toString());
 			String tsName = (String)obj[6];
+			String photo = (String)obj[7];
 			dto.setUserAccountId(userAccountId);
 			dto.setPhone(phone);
 			dto.setAddress(address);
 			dto.setTownshipId(tsId);
 			dto.setTownshipName(tsName);
 			dto.setCityDto(new CityDto(cityId,cityName));
-			
+			dto.setPhoto(photo);
 		}
 		return dto;
 	}

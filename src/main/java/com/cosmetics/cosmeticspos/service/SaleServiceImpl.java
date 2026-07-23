@@ -1,6 +1,7 @@
 package com.cosmetics.cosmeticspos.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ import com.cosmetics.cosmeticspos.domain.Itemtransaction;
 import com.cosmetics.cosmeticspos.domain.Sale;
 import com.cosmetics.cosmeticspos.domain.Transaction;
 import com.cosmetics.cosmeticspos.dto.ItemtransactionDto;
-import com.cosmetics.cosmeticspos.dto.SaleDto;   
+import com.cosmetics.cosmeticspos.dto.ProductDto;
+import com.cosmetics.cosmeticspos.dto.SaleDto;
+import com.cosmetics.cosmeticspos.dto.TransactionDto;
+import com.cosmetics.cosmeticspos.dto.YearDto;   
 @Service
 public class SaleServiceImpl implements SaleService {
 
@@ -36,13 +40,17 @@ public class SaleServiceImpl implements SaleService {
 		saleDao.addSale(s);
 		
 		//Itemtransaction it = new Itemtransaction(dto.get);
-		for(ItemtransactionDto itDto:dto.getItemList()) {
-			itDto.setSaleId(s.getSaleId());
-			Itemtransaction it = new Itemtransaction(itDto);
+		int amount = 0;
+		for(ProductDto p:dto.getProductList()) {
+			
+			Itemtransaction it = new Itemtransaction(p);
+			it.setSaleId(s.getSaleId());
 			itDao.addItemtransaction(it);
+			amount+= it.getAmount();
 		}
-		
-		Transaction t = new Transaction(s.getSaleId(),dto.getTransaction()); 
+		TransactionDto tranDto = dto.getTransaction();
+		tranDto.setAmount(amount);
+		Transaction t = new Transaction(s.getSaleId(),tranDto); 
 		tranDao.addTransaction(t);
 		
 		dto.setVoucherCode(s.getVoucherCode());
@@ -81,6 +89,20 @@ public class SaleServiceImpl implements SaleService {
 			dtoList.add(dto);
 		}
 		return dtoList;
+	}
+
+	@Transactional(readOnly=true)
+	@Override
+	public List<SaleDto> getSaleList(Date fromDate, Date toDate, int customerId) {
+		// TODO Auto-generated method stub
+		return saleDao.getSaleList(fromDate,toDate,customerId);
+	}
+
+	@Transactional(readOnly=true)
+	@Override
+	public YearDto getSaleYearReport() {
+		// TODO Auto-generated method stub
+		return saleDao.getSaleYearReport();
 	}
 
 	

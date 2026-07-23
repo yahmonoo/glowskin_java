@@ -36,15 +36,15 @@ public class Product {
 					
 					//if("lip".equals(dto.getColorBox())) 
 					if(dto.getColorBox()==1){
-						this.colorOne=dto.getColorOne();
+						this.colorOne="O6";
 						this.colorTwo="07";
 						this.colorThree="08";
 						this.colorFour="09";
 					}else {
-						this.colorOne="none";
-						this.colorTwo="none";
-						this.colorThree="none";
-						this.colorFour="none";
+						this.colorOne=null;
+						this.colorTwo=null;
+						this.colorThree=null;
+						this.colorFour=null;
 					}
 					this.priceOne=dto.getPriceOne();
 					this.priceTwo=dto.getPriceTwo();

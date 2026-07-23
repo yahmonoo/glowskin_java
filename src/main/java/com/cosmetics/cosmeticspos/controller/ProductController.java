@@ -80,6 +80,17 @@ public class ProductController {
 				throw new RuntimeException("Add,Product Error!", e);
 			}
 	}
+		@PostMapping("productphoto/update/{productId}")
+		public int updateProductPhoto(
+				@PathVariable("productId") int productId,
+				@RequestParam("files") MultipartFile[] files) {
+			try {
+				return productService.updateProductPhoto(productId, files);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("Update Product Photo Error!", e);
+			}
+		}
 //		@PutMapping("product/photo/{productId}")
 //		public int updateProductPhoto(@PathVariable("productId")int productId,@RequestParam(value = "file",required=false) MultipartFile file) {
 //			try {
