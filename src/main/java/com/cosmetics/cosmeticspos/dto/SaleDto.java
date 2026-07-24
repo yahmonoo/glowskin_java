@@ -7,6 +7,12 @@ import java.util.List;
 import com.cosmetics.cosmeticspos.domain.Sale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.infolite.dental.util.DateFormatDeserializer;
+import com.infolite.dental.util.DateFormatSerializer;
+import com.infolite.dental.util.DateTimeFormatDeserializer;
+import com.infolite.dental.util.DateTimeFormatSerializer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,7 +53,11 @@ public class SaleDto {
 	private int saleId;
 	private int customerId;
 	private UseraccountDto userAccount;
+	@JsonSerialize(using = DateFormatSerializer.class)
+	@JsonDeserialize(using = DateFormatDeserializer.class)
 	private Date receivedDate;
+	@JsonSerialize(using = DateTimeFormatSerializer.class)
+	@JsonDeserialize(using = DateTimeFormatDeserializer.class)
 	private Date date;
 	private String voucherCode;
 	private List<ItemtransactionDto> itemList;

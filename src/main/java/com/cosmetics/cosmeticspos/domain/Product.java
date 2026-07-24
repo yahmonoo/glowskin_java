@@ -56,7 +56,7 @@ public class Product {
 					this.count=dto.getCount();
 					this.discountPriceOne=dto.getDiscountPriceOne();
 					this.discountPriceTwo=dto.getDiscountPriceTwo();
-					this.percent=dto.getPercent();
+					//this.
 					this.normalPriceOne=dto.getNormalPriceOne();
 					this.normalPriceTwo=dto.getNormalPriceTwo();
 					this.rating=dto.getRating();

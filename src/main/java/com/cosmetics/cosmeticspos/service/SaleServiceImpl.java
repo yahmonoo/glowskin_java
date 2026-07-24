@@ -67,15 +67,20 @@ public class SaleServiceImpl implements SaleService {
 	}
 
 	@Transactional(readOnly=false)
-	public int deleteSale(int SaleId) {
-//	    SaleDto dto = new SaleDto();
-//	    dto.setSaleId(SaleId); 
-	    
+	public int deleteSale(int saleId) {
+		
+		saleDao.deleteTransactionBySaleId(saleId);//
+		saleDao.deleteItemTransactionBySaleId(saleId);//
+		
+		
 	    Sale s= new Sale(); 
-	    s.setSaleId(SaleId);
+	    s.setSaleId(saleId);
+	    saleDao.deleteSale(s);//
 	    
-	    saleDao.deleteSale(s);
-	    return SaleId;
+	    
+	    
+	    
+	    return saleId;
 	}
 
 	@Transactional(readOnly=true)

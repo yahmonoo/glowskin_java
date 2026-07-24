@@ -121,7 +121,7 @@ public class ProductDaoImpl implements ProductDao {
 //					+ "p.title,p.`code`,p.priceOne\r\n"
 //					+ "FROM product p where p.rating>0 order by p.rating DESC ").getResultList();//rating 
 		}else if("d".equals(type)) {
-			sqlWhere += " AND p.discountPriceOne>0  ";
+			sqlWhere += " AND p.discountPriceOne>0 and p.percent>0 ";
 			sqlOrderBy = " order by p.discountPriceOne DESC  ";
 //			objList = session.createNativeQuery("SELECT p.photoOne,\r\n"
 //					+ "p.title,p.`code`,p.priceOne\r\n"
@@ -165,7 +165,8 @@ public class ProductDaoImpl implements ProductDao {
 			categoryId = Integer.parseInt(obj[6].toString());
 			int discountPriceOne = Integer.parseInt(obj[7].toString());
 			int normalPriceOne = Integer.parseInt(obj[8].toString());
-			int percent = Integer.parseInt(obj[9].toString());
+			int percent = obj[9] != null?Integer.parseInt(obj[9].toString()):0;
+//			int percentTwo = obj[10] != null?Integer.parseInt(obj[10].toString()):0;
 			String categoryName = (String)obj[10];
 			int sizeOne = Integer.parseInt(obj[11].toString());
 			ProductDto dto = new ProductDto(photoOne,title,code,priceOne,rating);

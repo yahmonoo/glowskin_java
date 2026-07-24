@@ -43,9 +43,9 @@ public class SaleController {
 	    return saleService.updateSale(dto); 
 	}
 
-	@DeleteMapping("sale")
-	public int deleteSale(@RequestBody SaleDto dto){
-	    return saleService.deleteSale(dto.getSaleId()); 
+	@DeleteMapping("sale/{saleId}")
+	public int deleteSale(@PathVariable("saleId")int saleId){
+	    return saleService.deleteSale(saleId); 
 	}
 	
 	@GetMapping("salelist")

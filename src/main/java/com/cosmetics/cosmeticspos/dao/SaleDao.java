@@ -25,5 +25,9 @@ public interface SaleDao {
 
 	YearDto getSaleYearReport();
 
+	void deleteTransactionBySaleId(int saleId);
+
+	void deleteItemTransactionBySaleId(int saleId);
+
 
 }
