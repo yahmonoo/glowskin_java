@@ -21,6 +21,8 @@ public interface SaleService {
 	List<SaleDto> getSaleList(Date fromDate, Date toDate, int customerId);
 
 	YearDto getSaleYearReport();
+
+	YearDto getSaleAnalyticsReport(int year, int month);
 	
 
 }

@@ -119,6 +119,12 @@ public class SaleServiceImpl implements SaleService {
 		// TODO Auto-generated method stub
 		return saleDao.getSaleYearReport();
 	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public YearDto getSaleAnalyticsReport(int year, int month) {
+	    return saleDao.getSaleAnalyticsReport(year, month);
+	}
 
 	
 

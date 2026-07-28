@@ -1,8 +1,12 @@
 package com.cosmetics.cosmeticspos.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cosmetics.cosmeticspos.domain.Sale;
+import com.cosmetics.cosmeticspos.domain.Transaction;
 import com.cosmetics.cosmeticspos.dto.SaleDto;
 import com.cosmetics.cosmeticspos.dto.YearDto;
 import com.infolite.dental.util.ConvertDate;
@@ -18,6 +23,7 @@ import com.infolite.dental.util.ConvertDate;
 public class SaleDaoImpl implements SaleDao{
 	@Autowired
 	SessionFactory sessionFactory;
+	private Double totalPayment;
 
 	@Override
 	public List<SaleDto> getSale(String search) {
@@ -214,5 +220,68 @@ public class SaleDaoImpl implements SaleDao{
 				session.createNativeQuery("delete from itemtransaction  where saleId =:saleId")
 				.setParameter("saleId", saleId).executeUpdate();
 	}
+	@Override
+	public YearDto getSaleAnalyticsReport(int year, int month) {
+		  Session session = sessionFactory.getCurrentSession();
 
+	        List<Transaction> transactionList = session.createQuery("from Transaction", Transaction.class).list();
+
+	        List<String> labels = new ArrayList<>();
+	        List<Double> salesData = new ArrayList<>();
+
+	        if (month == 0) {
+	            String[] monthNames = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	            labels.addAll(Arrays.asList(monthNames));
+
+	            Double[] yearlyArray = new Double[12];
+	            Arrays.fill(yearlyArray, 0.0);
+
+	            for (Transaction t : transactionList) {
+	                if (t.getDate() != null) {
+	                    Calendar cal = Calendar.getInstance();
+	                    cal.setTime(t.getDate()); 
+
+	                    if (cal.get(Calendar.YEAR) == year) {
+	                        int sMonth = cal.get(Calendar.MONTH); // 0 - 11
+	                        yearlyArray[sMonth] += t.getPayment(); 
+	                    }
+	                }
+	            }
+	            salesData.addAll(Arrays.asList(yearlyArray));
+
+	        } else {
+	            int targetMonthIndex = month - 1; // January = 0, July = 6
+
+	            Calendar calObj = Calendar.getInstance();
+	            calObj.set(year, targetMonthIndex, 1);
+	            int daysInMonth = calObj.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+	            for (int i = 1; i <= daysInMonth; i++) {
+	                labels.add(String.valueOf(i));
+	            }
+
+	            Double[] dailyArray = new Double[daysInMonth];
+	            Arrays.fill(dailyArray, 0.0);
+
+	            for (Transaction t : transactionList) {
+	                if (t.getDate() != null) {
+	                    Calendar cal = Calendar.getInstance();
+	                    cal.setTime(t.getDate()); 
+
+	                    int tYear = cal.get(Calendar.YEAR);
+	                    int tMonth = cal.get(Calendar.MONTH); // 0 - 11
+	                    int tDay = cal.get(Calendar.DAY_OF_MONTH); // 1 - 31
+
+	                    if (tYear == year && tMonth == targetMonthIndex) {
+	                        dailyArray[tDay - 1] += t.getPayment(); 
+	                    }
+	                }
+	            }
+	            salesData.addAll(Arrays.asList(dailyArray));
+	        }
+
+	        return new YearDto(labels, salesData);
+	    }
 }
+
+

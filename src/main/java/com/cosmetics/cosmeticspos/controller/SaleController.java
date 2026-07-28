@@ -79,4 +79,17 @@ public class SaleController {
 			throw new RuntimeException("Add,Product Error!", e);
 		}
 	}
+	
+	@GetMapping("sale/analytics")
+	public YearDto getSaleAnalyticsReport(
+	    @RequestParam(name = "year", defaultValue = "2026") int year,
+	    @RequestParam(name = "month", defaultValue = "0") int month
+	) {
+	    try {
+	        return saleService.getSaleAnalyticsReport(year, month);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new RuntimeException("Get Analytics Report Error!", e);
+	    }
+	}
 }
