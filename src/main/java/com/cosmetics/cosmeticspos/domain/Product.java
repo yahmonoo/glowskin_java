@@ -36,7 +36,7 @@ public class Product {
 					
 					//if("lip".equals(dto.getColorBox())) 
 					if(dto.getColorBox()==1){
-						this.colorOne="O6";
+						this.colorOne="06";
 						this.colorTwo="07";
 						this.colorThree="08";
 						this.colorFour="09";

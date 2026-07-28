@@ -83,17 +83,27 @@ public class SaleServiceImpl implements SaleService {
 	    return saleId;
 	}
 
-	@Transactional(readOnly=true)
+//	@Transactional(readOnly=true)
+//	
+//	public List<SaleDto> getSale() {
+//		// TODO Auto-generated method stub
+//		List<Sale> saleList = saleDao.getSale();//
+//		List<SaleDto> dtoList = new ArrayList<>();
+//		for(Sale s:saleList) {
+//		    SaleDto dto = new SaleDto(s);
+//			dtoList.add(dto);
+//		}
+//		return dtoList;
+	//}
 	
+	@Transactional(readOnly=true)
 	public List<SaleDto> getSale() {
-		// TODO Auto-generated method stub
-		List<Sale> saleList = saleDao.getSale();//
-		List<SaleDto> dtoList = new ArrayList<>();
-		for(Sale s:saleList) {
-		    SaleDto dto = new SaleDto(s);
-			dtoList.add(dto);
-		}
-		return dtoList;
+	    // getSaleList(fromDate, toDate, customerId) ကို ခေါ်သုံးပေးလိုက်ပါ
+	    // ဥပမာ- Date range မကန့်သတ်ဘဲ အကုန်ယူရန် default minimum & maximum date ပေးခြင်း
+	    Date fromDate = new Date(0); // 1970-01-01
+	    Date toDate = new Date();    // Today
+	    
+	    return saleDao.getSaleList(fromDate, toDate, 0);
 	}
 
 	@Transactional(readOnly=true)

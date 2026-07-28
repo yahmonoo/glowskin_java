@@ -51,6 +51,7 @@ public class Itemtransaction {
 	public Itemtransaction(ProductDto dto) {
 		// TODO Auto-generated constructor stub
 		//this.itemTransactionId = dto.getItemTransactionId();
+		System.out.println(" >>>>>>>>>>>>>.. "+dto.getProductId());
 		this.productId = dto.getProductId();
 		//this.saleId=dto.getSaleId();
 		this.qty=dto.getBuyQuantity();

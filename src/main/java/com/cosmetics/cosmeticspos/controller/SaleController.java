@@ -34,8 +34,14 @@ public class SaleController {
 	}
 	@PostMapping("sale")
 	public SaleDto addSale(@RequestBody SaleDto dto){
+		try {
+			return saleService.addSale(dto);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new RuntimeException("Add,Product Error!", e);
+		}
 		
-		return saleService.addSale(dto);
 	}
 	@PutMapping("sale/{saleId}")
 	public int updateSale(@PathVariable("saleId")int saleId,@RequestBody SaleDto dto){
