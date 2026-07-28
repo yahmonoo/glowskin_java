@@ -29,5 +29,7 @@ public interface SaleDao {
 
 	void deleteItemTransactionBySaleId(int saleId);
 
+	YearDto getSaleAnalyticsReport(int year, int month);
+
 
 }
