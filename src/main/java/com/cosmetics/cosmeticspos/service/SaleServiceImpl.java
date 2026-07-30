@@ -18,7 +18,8 @@ import com.cosmetics.cosmeticspos.dto.ItemtransactionDto;
 import com.cosmetics.cosmeticspos.dto.ProductDto;
 import com.cosmetics.cosmeticspos.dto.SaleDto;
 import com.cosmetics.cosmeticspos.dto.TransactionDto;
-import com.cosmetics.cosmeticspos.dto.YearDto;   
+import com.cosmetics.cosmeticspos.dto.YearDto;
+import com.infolite.dental.util.ConvertDate;   
 @Service
 public class SaleServiceImpl implements SaleService {
 
@@ -124,6 +125,51 @@ public class SaleServiceImpl implements SaleService {
 	@Override
 	public YearDto getSaleAnalyticsReport(int year, int month) {
 	    return saleDao.getSaleAnalyticsReport(year, month);
+	}
+
+	@Transactional(readOnly=false)
+	@Override
+	public SaleDto addNewSale(SaleDto dto) {
+		// TODO Auto-generated method stub
+		Sale s = new Sale();
+		s.setCustomerId(dto.getUserAccount().getUserAccountId());
+		s.setReceivedDate(dto.getReceivedDate());
+		s.setDate(new Date());
+		s.setVoucherCode(ConvertDate.convertyymmddhhmmss(new Date()));
+		saleDao.addSale(s);
+		
+		for(ItemtransactionDto i : dto.getItemList()) {
+
+		    Itemtransaction it = new Itemtransaction();
+
+		    // Sale relation
+		    it.setSaleId(s.getSaleId());
+
+		    // Product relation
+		    it.setProductId(i.getProductId());
+
+		    // Item values
+		    it.setQty(i.getQty());
+		    it.setUnitPrice(i.getUnitPrice());
+		    it.setAmount(i.getAmount());
+		    it.setDiscount(i.getDiscount());
+		    it.setBalance(i.getBalance());
+		    itDao.addItemtransaction(it);
+		}
+		
+		
+		Transaction t = new Transaction();
+		t.setSaleId(s.getSaleId());
+		t.setAmount(dto.getTransaction().getPayment());
+		t.setDeliFee(0);
+		t.setPayment(dto.getTransaction().getPayment());
+		t.setBalance(dto.getTransaction().getPayment());
+		t.setPaymentType("kpay");
+		t.setDate(new Date());
+		t.setModifiedDate(new Date());
+		tranDao.addTransaction(t);
+		return dto;
+		
 	}
 
 	

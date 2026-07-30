@@ -23,6 +23,8 @@ public interface SaleService {
 	YearDto getSaleYearReport();
 
 	YearDto getSaleAnalyticsReport(int year, int month);
+
+	SaleDto addNewSale(SaleDto dto);
 	
 
 }

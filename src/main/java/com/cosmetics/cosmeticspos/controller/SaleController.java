@@ -92,4 +92,16 @@ public class SaleController {
 	        throw new RuntimeException("Get Analytics Report Error!", e);
 	    }
 	}
+	
+	@PostMapping("newsale")
+	public SaleDto addNewSale(@RequestBody SaleDto dto){
+		try {
+			return saleService.addNewSale(dto);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new RuntimeException("Add,Product Error!", e);
+		}
+		
+	}
 }
