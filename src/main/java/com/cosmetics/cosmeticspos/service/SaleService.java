@@ -25,6 +25,8 @@ public interface SaleService {
 	YearDto getSaleAnalyticsReport(int year, int month);
 
 	SaleDto addNewSale(SaleDto dto);
+
+	List<SaleDto> getSaleByUserId(int userId);
 	
 
 }

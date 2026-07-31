@@ -31,6 +31,10 @@ public class ItemtransactionDto {
 	private int amount;
 	private int discount;
 	private int balance;
+	public void setProductId(Object productId2) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
 

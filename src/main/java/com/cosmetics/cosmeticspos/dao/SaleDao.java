@@ -31,5 +31,7 @@ public interface SaleDao {
 
 	YearDto getSaleAnalyticsReport(int year, int month);
 
+	List<SaleDto> getSaleByUserId(int userId);
+
 
 }

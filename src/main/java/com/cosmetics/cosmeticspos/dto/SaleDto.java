@@ -66,5 +66,6 @@ public class SaleDto {
 	private int itemCount;
 	private String productId;
 	private int unitPrice;
+	private List<ItemtransactionDto> items; 
 
 }

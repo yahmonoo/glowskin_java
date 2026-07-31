@@ -65,5 +65,9 @@ public UseraccountDto(Useraccount ua) {
 	private String userType;
 	private String photo;
 	private CityDto cityDto;
+	public void setLocation(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

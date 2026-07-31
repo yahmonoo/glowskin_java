@@ -15,7 +15,10 @@ import org.springframework.stereotype.Repository;
 
 import com.cosmetics.cosmeticspos.domain.Sale;
 import com.cosmetics.cosmeticspos.domain.Transaction;
+import com.cosmetics.cosmeticspos.dto.ItemtransactionDto;
 import com.cosmetics.cosmeticspos.dto.SaleDto;
+import com.cosmetics.cosmeticspos.dto.TransactionDto;
+import com.cosmetics.cosmeticspos.dto.UseraccountDto;
 import com.cosmetics.cosmeticspos.dto.YearDto;
 import com.infolite.dental.util.ConvertDate;
 
@@ -282,6 +285,106 @@ public class SaleDaoImpl implements SaleDao{
 
 	        return new YearDto(labels, salesData);
 	    }
+	
+	@Override
+	public List<SaleDto> getSaleByUserId(int userId) {
+	    Session session = sessionFactory.getCurrentSession();
+	    List<SaleDto> dtoList = new ArrayList<>();
+
+	    try {
+	        
+	        List<Object[]> saleObjList = session.createNativeQuery(
+	                "SELECT s.saleId, s.customerId, s.receivedDate, s.date, s.voucherCode " +
+	                "FROM sale s " +
+	                "WHERE s.customerId = :userId ORDER BY s.date DESC")
+	                .setParameter("userId", userId)
+	                .getResultList();
+
+	        for (Object[] s : saleObjList) {
+	            SaleDto dto = new SaleDto();
+	            int saleId = Integer.parseInt(s[0].toString());
+	            int custId = Integer.parseInt(s[1].toString());
+	            Date receivedDate = (Date) s[2];
+	            Date date = (Date) s[3];
+	            String voucherCode = s[4] != null ? s[4].toString() : String.valueOf(saleId);
+
+	            dto.setSaleId(saleId);
+	            dto.setCustomerId(custId);
+	            dto.setReceivedDate(receivedDate);
+	            dto.setDate(date);
+	            dto.setVoucherCode(voucherCode);
+
+	          
+	            try {
+	                List<Object[]> userObj = session.createNativeQuery(
+	                        "SELECT u.phone, u.address, u.location FROM useraccount u WHERE u.userAccountId = :userId")
+	                        .setParameter("userId", custId)
+	                        .getResultList();
+
+	                UseraccountDto userDto = new UseraccountDto();
+	                if (!userObj.isEmpty()) {
+	                    Object[] u = userObj.get(0);
+	                    userDto.setPhone(u[0] != null ? u[0].toString() : "-");
+	                    userDto.setAddress(u[1] != null ? u[1].toString() : "-");
+	                    userDto.setLocation(u[2] != null ? u[2].toString() : "-");
+	                }
+	                dto.setUserAccount(userDto);
+	            } catch (Exception e) {
+	                System.out.println("Useraccount Fetch Error: " + e.getMessage());
+	            }
+
+	            
+	            try {
+	                List<Object[]> itemObjList = session.createNativeQuery(
+	                        "SELECT p.productName, it.qty, it.unitPrice, it.amount " +
+	                        "FROM itemtransaction it " +
+	                        "LEFT JOIN product p ON p.productId = it.productId " +
+	                        "WHERE it.saleId = :saleId")
+	                        .setParameter("saleId", saleId)
+	                        .getResultList();
+
+	                List<ItemtransactionDto> itemList = new ArrayList<>();
+	                for (Object[] obj : itemObjList) {
+	                    ItemtransactionDto itemDto = new ItemtransactionDto();
+	                    itemDto.setProductId(obj[0] != null ? obj[0].toString() : "Cosmetic Product");
+	                    itemDto.setQty(obj[1] != null ? Integer.parseInt(obj[1].toString()) : 1);
+	                    itemDto.setUnitPrice(obj[2] != null ? Math.round(Float.parseFloat(obj[2].toString())) : 0);
+	                    itemDto.setAmount(obj[3] != null ? Math.round(Float.parseFloat(obj[3].toString())) : 0);
+	                    itemList.add(itemDto);
+	                }
+	                dto.setItemList(itemList);
+	            } catch (Exception e) {
+	                System.out.println("Item Fetch Error: " + e.getMessage());
+	            }
+
+	            try {
+	                List<Object[]> tranObjList = session.createNativeQuery(
+	                        "SELECT t.paymentType, t.amount, t.deliFee, t.payment " +
+	                        "FROM `transaction` t WHERE t.saleId = :saleId")
+	                        .setParameter("saleId", saleId)
+	                        .getResultList();
+
+	                if (!tranObjList.isEmpty()) {
+	                    Object[] t = tranObjList.get(0);
+	                    TransactionDto tranDto = new TransactionDto();
+	                    tranDto.setPaymentType(t[0] != null ? t[0].toString() : "kpay");
+	                    tranDto.setAmount(t[1] != null ? Math.round(Float.parseFloat(t[1].toString())) : 0);
+	                    tranDto.setDeliFee(t[2] != null ? Math.round(Float.parseFloat(t[2].toString())) : 0);
+	                    tranDto.setPayment(t[3] != null ? Math.round(Float.parseFloat(t[3].toString())) : 0);
+	                    dto.setTransaction(tranDto);
+	                }
+	            } catch (Exception e) {
+	                System.out.println("Transaction Fetch Error: " + e.getMessage());
+	            }
+
+	            dtoList.add(dto);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return dtoList;
+	}
 }
 
 

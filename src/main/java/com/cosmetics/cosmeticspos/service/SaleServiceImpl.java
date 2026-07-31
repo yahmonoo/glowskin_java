@@ -142,13 +142,13 @@ public class SaleServiceImpl implements SaleService {
 
 		    Itemtransaction it = new Itemtransaction();
 
-		    // Sale relation
+		    
 		    it.setSaleId(s.getSaleId());
 
-		    // Product relation
+		    
 		    it.setProductId(i.getProductId());
 
-		    // Item values
+		   
 		    it.setQty(i.getQty());
 		    it.setUnitPrice(i.getUnitPrice());
 		    it.setAmount(i.getAmount());
@@ -172,6 +172,11 @@ public class SaleServiceImpl implements SaleService {
 		
 	}
 
-	
+	@Transactional(readOnly = true)
+	@Override
+	public List<SaleDto> getSaleByUserId(int userId) {
+	    
+	    return saleDao.getSaleByUserId(userId);
+	}
 
 }

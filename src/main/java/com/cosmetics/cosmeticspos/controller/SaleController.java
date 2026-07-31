@@ -104,4 +104,14 @@ public class SaleController {
 		}
 		
 	}
+	
+	@GetMapping("sale/user/{userId}")
+	public List<SaleDto> getSaleByUserId(@PathVariable("userId") int userId) {
+	    try {
+	        return saleService.getSaleByUserId(userId); 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new RuntimeException("Get Sale By User Error!", e);
+	    }
+	}
 }
