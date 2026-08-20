@@ -99,10 +99,9 @@ public class SaleServiceImpl implements SaleService {
 	
 	@Transactional(readOnly=true)
 	public List<SaleDto> getSale() {
-	    // getSaleList(fromDate, toDate, customerId) ကို ခေါ်သုံးပေးလိုက်ပါ
-	    // ဥပမာ- Date range မကန့်သတ်ဘဲ အကုန်ယူရန် default minimum & maximum date ပေးခြင်း
-	    Date fromDate = new Date(0); // 1970-01-01
-	    Date toDate = new Date();    // Today
+	    
+		Date fromDate = new Date(0); 
+	    Date toDate = new Date();   
 	    
 	    return saleDao.getSaleList(fromDate, toDate, 0);
 	}
@@ -130,46 +129,48 @@ public class SaleServiceImpl implements SaleService {
 	@Transactional(readOnly=false)
 	@Override
 	public SaleDto addNewSale(SaleDto dto) {
-		// TODO Auto-generated method stub
-		Sale s = new Sale();
-		s.setCustomerId(dto.getUserAccount().getUserAccountId());
-		s.setReceivedDate(dto.getReceivedDate());
-		s.setDate(new Date());
-		s.setVoucherCode(ConvertDate.convertyymmddhhmmss(new Date()));
-		saleDao.addSale(s);
-		
-		for(ItemtransactionDto i : dto.getItemList()) {
+	    Sale s = new Sale();
+	    
+	    // Customer ID စစ်ယူခြင်း
+	    if (dto.getUserAccount() != null && dto.getUserAccount().getUserAccountId() != 0) {
+	        s.setCustomerId(dto.getUserAccount().getUserAccountId());
+	    } else if (dto.getCustomerId() != 0) {
+	        s.setCustomerId(dto.getCustomerId());
+	    } else {
+	        s.setCustomerId(1);
+	    }
 
-		    Itemtransaction it = new Itemtransaction();
-
-		    
-		    it.setSaleId(s.getSaleId());
-
-		    
-		    it.setProductId(i.getProductId());
-
-		   
-		    it.setQty(i.getQty());
-		    it.setUnitPrice(i.getUnitPrice());
-		    it.setAmount(i.getAmount());
-		    it.setDiscount(i.getDiscount());
-		    it.setBalance(i.getBalance());
-		    itDao.addItemtransaction(it);
-		}
-		
-		
-		Transaction t = new Transaction();
-		t.setSaleId(s.getSaleId());
-		t.setAmount(dto.getTransaction().getPayment());
-		t.setDeliFee(0);
-		t.setPayment(dto.getTransaction().getPayment());
-		t.setBalance(dto.getTransaction().getPayment());
-		t.setPaymentType("kpay");
-		t.setDate(new Date());
-		t.setModifiedDate(new Date());
-		tranDao.addTransaction(t);
-		return dto;
-		
+	    s.setReceivedDate(dto.getReceivedDate() != null ? dto.getReceivedDate() : new Date());
+	    s.setDate(new Date());
+	    s.setVoucherCode(ConvertDate.convertyymmddhhmmss(new Date()));
+	    
+	    saleDao.addSale(s);
+	    
+	    if (dto.getItemList() != null) {
+	        for (ItemtransactionDto i : dto.getItemList()) {
+	            Itemtransaction it = new Itemtransaction(i);
+	            it.setSaleId(s.getSaleId()); 
+	            itDao.addItemtransaction(it);
+	        }
+	    }
+	    
+	    
+	    Transaction t = new Transaction();
+	    t.setSaleId(s.getSaleId());
+	    
+	    double paymentAmount = (dto.getTransaction() != null) ? dto.getTransaction().getPayment() : 0;
+	    t.setAmount(paymentAmount);
+	    t.setDeliFee(0);
+	    t.setPayment(paymentAmount);
+	    t.setBalance(paymentAmount);
+	    t.setPaymentType("kpay");
+	    t.setDate(new Date());
+	    t.setModifiedDate(new Date());
+	    tranDao.addTransaction(t);
+	    
+	    dto.setSaleId(s.getSaleId());
+	    dto.setVoucherCode(s.getVoucherCode());
+	    return dto;
 	}
 
 	@Transactional(readOnly = true)

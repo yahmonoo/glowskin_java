@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @JsonInclude(value = Include.USE_DEFAULTS)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,9 +30,50 @@ public class ItemtransactionDto {
 	private int amount;
 	private int discount;
 	private int balance;
-	public void setProductId(Object productId2) {
+	
+	public int getItemTransactionId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public int getProductId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public void setProductId(Object object) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void setQty(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setUnitPrice(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setAmount(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	public int getSaleId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public int getBalance() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public int getUnitPrice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public int getAmount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public int getDiscount() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

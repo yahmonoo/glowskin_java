@@ -210,12 +210,12 @@ public class SaleDaoImpl implements SaleDao{
 
 	@Override
 	public void deleteTransactionBySaleId(int saleId) {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		session.createNativeQuery("delete from transaction  where saleId =:saleId")
-		.setParameter("saleId", saleId).executeUpdate();
+	    Session session = sessionFactory.getCurrentSession();
+	   
+	    session.createNativeQuery("DELETE FROM `transaction` WHERE saleId = :saleId")
+	            .setParameter("saleId", saleId)
+	            .executeUpdate();
 	}
-
 	@Override
 	public void deleteItemTransactionBySaleId(int saleId) {
 		// TODO Auto-generated method stub

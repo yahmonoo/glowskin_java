@@ -108,6 +108,18 @@ public class Transaction {
 	public void setDeliFee(int deliFee) {
 		this.deliFee = deliFee;
 	}
+	public void setAmount(double paymentAmount) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setPayment(double paymentAmount) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setBalance(double paymentAmount) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

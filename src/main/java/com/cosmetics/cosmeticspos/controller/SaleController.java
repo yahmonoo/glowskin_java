@@ -95,14 +95,12 @@ public class SaleController {
 	
 	@PostMapping("newsale")
 	public SaleDto addNewSale(@RequestBody SaleDto dto){
-		try {
-			return saleService.addNewSale(dto);
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			throw new RuntimeException("Add,Product Error!", e);
-		}
-		
+	    try {
+	        return saleService.addNewSale(dto);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new RuntimeException("Add Sale Error: " + e.getMessage(), e);
+	    }
 	}
 	
 	@GetMapping("sale/user/{userId}")

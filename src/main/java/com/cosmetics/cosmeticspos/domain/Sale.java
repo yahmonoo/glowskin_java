@@ -30,7 +30,11 @@ public class Sale {
 	public Sale(SaleDto dto) {
 
 		this.saleId = dto.getSaleId();
-		this.customerId = dto.getCustomerId();
+		if (dto.getCustomerId() != 0) {
+	        this.customerId = dto.getCustomerId();
+	    } else if (dto.getUserAccount() != null && dto.getUserAccount().getUserAccountId() != 0) {
+	        this.customerId = dto.getUserAccount().getUserAccountId();
+	    }
 		this.receivedDate  = new Date();
 		if(dto.getReceivedDate()!=null) {
 			this.receivedDate = dto.getReceivedDate();
