@@ -31,50 +31,58 @@ public class ItemtransactionDto {
 	private int discount;
 	private int balance;
 	
+	
 	public int getItemTransactionId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return itemTransactionId;
+	}
+	public void setItemTransactionId(int itemTransactionId) {
+		this.itemTransactionId = itemTransactionId;
 	}
 	public int getProductId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return productId;
 	}
-	public void setProductId(Object object) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void setQty(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void setUnitPrice(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void setAmount(int i) {
-		// TODO Auto-generated method stub
-		
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 	public int getSaleId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return saleId;
 	}
-	public int getBalance() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setSaleId(int saleId) {
+		this.saleId = saleId;
+	}
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
 	public int getUnitPrice() {
-		// TODO Auto-generated method stub
-		return 0;
+		return unitPrice;
+	}
+	public void setUnitPrice(int unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 	public int getAmount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 	public int getDiscount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return discount;
 	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+	
+	
+	
 	
 }
 

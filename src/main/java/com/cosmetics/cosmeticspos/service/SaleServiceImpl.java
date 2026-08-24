@@ -148,8 +148,16 @@ public class SaleServiceImpl implements SaleService {
 	    
 	    if (dto.getItemList() != null) {
 	        for (ItemtransactionDto i : dto.getItemList()) {
-	            Itemtransaction it = new Itemtransaction(i);
+	            Itemtransaction it = new Itemtransaction();
 	            it.setSaleId(s.getSaleId()); 
+	          
+	            it.setProductId(i.getProductId());
+	            it.setQty(i.getQty());
+			    it.setUnitPrice(i.getUnitPrice());
+			    it.setAmount(i.getAmount());
+			    it.setDiscount(i.getDiscount());
+			    it.setBalance(i.getBalance());
+	
 	            itDao.addItemtransaction(it);
 	        }
 	    }

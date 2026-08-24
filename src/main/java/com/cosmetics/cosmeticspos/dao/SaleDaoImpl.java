@@ -346,7 +346,7 @@ public class SaleDaoImpl implements SaleDao{
 	                List<ItemtransactionDto> itemList = new ArrayList<>();
 	                for (Object[] obj : itemObjList) {
 	                    ItemtransactionDto itemDto = new ItemtransactionDto();
-	                    itemDto.setProductId(obj[0] != null ? obj[0].toString() : "Cosmetic Product");
+	                    itemDto.setProductId(obj[0] != null ? Integer.parseInt(obj[0].toString() ): 0);
 	                    itemDto.setQty(obj[1] != null ? Integer.parseInt(obj[1].toString()) : 1);
 	                    itemDto.setUnitPrice(obj[2] != null ? Math.round(Float.parseFloat(obj[2].toString())) : 0);
 	                    itemDto.setAmount(obj[3] != null ? Math.round(Float.parseFloat(obj[3].toString())) : 0);
