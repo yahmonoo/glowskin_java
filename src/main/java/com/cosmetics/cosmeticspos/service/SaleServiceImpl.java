@@ -98,10 +98,9 @@ public class SaleServiceImpl implements SaleService {
 	//}
 	
 	@Transactional(readOnly=true)
-	public List<SaleDto> getSale() {
+	public List<SaleDto> getSale(Date fromDate, Date toDate) {
 	    
-		Date fromDate = new Date(0); 
-	    Date toDate = new Date();   
+		
 	    
 	    return saleDao.getSaleList(fromDate, toDate, 0);
 	}
@@ -140,7 +139,7 @@ public class SaleServiceImpl implements SaleService {
 	        s.setCustomerId(1);
 	    }
 
-	    s.setReceivedDate(dto.getReceivedDate() != null ? dto.getReceivedDate() : new Date());
+	    s.setReceivedDate(dto.getReceivedDate());
 	    s.setDate(new Date());
 	    s.setVoucherCode(ConvertDate.convertyymmddhhmmss(new Date()));
 	    

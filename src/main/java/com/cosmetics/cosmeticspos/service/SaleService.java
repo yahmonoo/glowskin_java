@@ -8,7 +8,7 @@ import com.cosmetics.cosmeticspos.dto.YearDto;
 
 public interface SaleService {
 
-	List<SaleDto> getSale();
+	List<SaleDto> getSale(Date fromDate, Date toDate);
 
 	SaleDto addSale(SaleDto dto);
 	

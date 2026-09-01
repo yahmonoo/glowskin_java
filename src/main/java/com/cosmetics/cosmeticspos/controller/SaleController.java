@@ -29,8 +29,10 @@ public class SaleController {
 	SaleService saleService;
 	
 	@GetMapping("sale")
-	public List<SaleDto> getSale(){
-		return saleService.getSale();
+	public List<SaleDto> getSale(@RequestParam(name="fromDate",required=false)@DateTimeFormat(pattern="dd-MM-yyyy")Date fromDate,
+			@RequestParam(name="toDate",required=false)@DateTimeFormat(pattern="dd-MM-yyyy")Date toDate,
+			@RequestParam(name="status",defaultValue = "0")int status){
+		return saleService.getSale(fromDate,toDate);
 	}
 	@PostMapping("sale")
 	public SaleDto addSale(@RequestBody SaleDto dto){
@@ -96,6 +98,7 @@ public class SaleController {
 	@PostMapping("newsale")
 	public SaleDto addNewSale(@RequestBody SaleDto dto){
 	    try {
+	    		
 	        return saleService.addNewSale(dto);
 	    } catch (Exception e) {
 	        e.printStackTrace();

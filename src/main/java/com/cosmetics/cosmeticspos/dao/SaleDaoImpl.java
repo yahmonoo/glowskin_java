@@ -149,16 +149,31 @@ public class SaleDaoImpl implements SaleDao{
 	    }
 
 	  
+	    String sqlData = "SELECT \r\n"
+	    		+ "    ua.userAccountId,\r\n"
+	    		+ "    ua.profileName,\r\n"
+	    		+ "    s.receivedDate,\r\n"
+	    		+ "    s.voucherCode,\r\n"
+	    		+ "    COALESCE(SUM(it.qty), 0) AS itemCount,\r\n"
+	    		+ "    COALESCE(t.amount, 0) AS amount,\r\n"
+	    		+ "    COALESCE(t.deliFee, 0) AS deliFee,\r\n"
+	    		+ "    t.paymentType,\r\n"
+	    		+ "    COALESCE(t.payment, 0) AS payment,\r\n"
+	    		+ "    s.date,\r\n"
+	    		+ "    s.saleId,\r\n"
+	    		+ "    GROUP_CONCAT(it.productId) AS productIds,\r\n"
+	    		+ "    AVG(it.unitPrice) AS unitPrice\r\n"
+	    		+ "FROM sale s\r\n"
+	    		+ "LEFT JOIN useraccount ua \r\n"
+	    		+ "    ON ua.userAccountId = s.customerId\r\n"
+	    		+ "LEFT JOIN itemtransaction it \r\n"
+	    		+ "    ON it.saleId = s.saleId\r\n"
+	    		+ "LEFT JOIN `transaction` t \r\n"
+	    		+ "    ON t.saleId = s.saleId\r\n"
+	    		+ "WHERE DATE(s.receivedDate) BETWEEN :fromDate AND :toDate\r\n";
+	    
 	    List<Object[]> objList = session.createNativeQuery(
-	            "SELECT ua.userAccountId, ua.profileName, "
-	            + "s.receivedDate, s.voucherCode, COALESCE(SUM(it.qty), 0) AS itemCount, "
-	            + "COALESCE(t.amount, 0), COALESCE(t.deliFee, 0), t.paymentType, COALESCE(t.payment, 0), "
-	            + "s.date, s.saleId, GROUP_CONCAT(it.productId) AS productIds, AVG(it.unitPrice) AS unitPrice "
-	            + "FROM sale s "
-	            + "LEFT JOIN useraccount ua ON ua.userAccountId = s.customerId "
-	            + "LEFT JOIN itemtransaction it ON it.saleId = s.saleId "
-	            + "LEFT JOIN `transaction` t ON t.saleId = s.saleId "
-	            + "WHERE DATE(s.receivedDate) BETWEEN :fromDate AND :toDate "
+	    		sqlData
 	            + sqlWhere
 	            + " GROUP BY s.saleId")
 	            .setParameter("fromDate", strFromDate)
